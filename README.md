@@ -1,60 +1,75 @@
-# Mars Multi-Agent Simulation — LA AGENCIA
+# Mars Multi-Agent Simulation — Ecosistema TB2 (4 Equipos Autónomos)
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Pygame](https://img.shields.io/badge/Pygame-2.5%2B-00A86B)](https://www.pygame.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Simulación multiagente competitiva en Marte (`60×45`) desarrollada en Python/Pygame, junto con el diseño, implementación y validación experimental del agente autónomo descentralizado **LA AGENCIA** (`equipoA.py`).
+Simulación multiagente competitiva en Marte (`60×45`) desarrollada en Python/Pygame, junto con el diseño, implementación y validación experimental de **cuatro facciones autónomas descentralizadas**: **LA AGENCIA** (`equipoA.py`), **RAVAGERS** (`equipoB.py`), **COLMENA** (`equipoC.py`) y **CUERVO** (`equipoD.py`).
 
-**LA AGENCIA** hereda estrictamente de `EquipoBase` sin modificar el motor (`simulador.py`) ni la interfaz base (`equipo_base.py`), respetando la **regla de integridad arquitectónica**: cada unidad posee memoria espacial privada (`MemoriaAgente`) bajo niebla de guerra y toda comunicación remota fluye exclusivamente mediante mensajes estructurados **FIPA-ACL** con costo energético (`-0.5%` por envío y `-0.5%` por recepción).
+Todas las facciones heredan estrictamente de `EquipoBase` sin modificar el motor (`simulador.py`) ni la interfaz base (`equipo_base.py`) —verificado mediante firmas **SHA-256**—, respetando la **regla de integridad arquitectónica**: cada unidad posee memoria espacial privada bajo niebla de guerra y toda comunicación remota fluye exclusivamente mediante mensajes estructurados **FIPA-ACL** con costo energético (`-0.5%` por envío y `-0.5%` por recepción).
+
+---
+
+## Los 4 Equipos Autónomos
+
+| Facción | Archivo | Paradigma Core | Coordinación / Subastas | Elección Social / Gobernanza | Fortaleza Principal |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **LA AGENCIA** | `equipoA.py` | Arquitectura modular de 6 capas calibrada con **RL-CEM** | **CNP** descentralizado (`K=2`, reservas TTL 32) | Consenso deliberativo **AutoGen** (2 rondas + Copeland) cada 45 ticks | Mayor volumen de hielo (`184.0 u.` en 4-Way; `10/10` vs. `EquipoBase`) |
+| **RAVAGERS** | `equipoB.py` | **Blitz Central Agresivo** + Encadenamiento 5/5 + **Modo Reposo** | FIPA-ACL ultra-ligero sin sobrecarga de subastas | Modo Reposo reactivo por cuota (`140 u.` base / `10 u.` rover) + escuadrón élite | Mayor Ratio medio a 200 u. (`0.02437`, 4/8 victorias, solo `782` msgs) |
+| **COLMENA** | `equipoC.py` | **Economía marginal $\Delta\text{Ratio}$** por anillos concéntricos ($R_1, R_2, R_3$) | **Subasta Inversa de Vickrey por Lotes** (*Batch Digest*, `2.62` vetas/msg) | **Condorcet / Copeland ponderado** por crisis cada 26 ticks | **1.º lugar bajo estrés 400 u.** (`0.01877`, `193 u.`) y menor `p99` |
+| **CUERVO** | `equipoD.py` | **Enjambre fantasma rival-aware** + mapa de calor $5\times 5$ + estela de tormenta | **CNP Doble Mercado** (`hielo_sigilo`, `soporte_carrona`, `rescate`) | **Votación por Aprobación + Copeland** cada 45 ticks | Mayor supervivencia (`39.6/50`), pico absoluto (`0.02943`) y *hook* exclusivo en `consumiendo` |
 
 ---
 
 ## Resultados Destacados
 
-En el torneo oficial de **10 partidas** alternando las cuatro esquinas del mapa (`A, B, C, D`) frente a tres rivales `EquipoBase`:
+### 1. Torneo Oficial 4-Way (`benchmark_torneo.py`, 200 unidades, 8 partidas con rotación A/B/C/D)
+
+Las cuatro facciones autónomas logran victorias y superan ampliamente el techo de `EquipoBase` (`0.01563`):
+
+| Facción | Victorias (1.º) | Pos. Media | Ratio Medio | Min–Max Ratio | Hielo (u.) | Batería (%) | Activas (/50) | Mensajes | `p99` (ms) | Máx (ms) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **RAVAGERS** | **4** | **2.00** | **0.02437** | `0.0200–0.0280` | 162.4 | **6669.9** | 26.3 | **782** | 7.251 | **13.373** |
+| **LA AGENCIA** | 2 | 2.50 | 0.02318 | `0.0202–0.0271` | **184.0** | 7920.4 | 25.5 | 1455 | 10.357 | 17.414 |
+| **CUERVO** | 1 | 2.50 | 0.02264 | `0.0150–0.0294` | 163.1 | 7253.8 | **39.6** | 1206 | 8.414 | 15.580 |
+| **COLMENA** | 1 | 3.00 | 0.02165 | `0.0177–0.0241` | 142.9 | 6720.4 | 38.4 | 1055 | **7.055** | 13.577 |
+
+![Resultados del Torneo 4-Way](informe/figuras/torneo_4way_ratio.png)
+
+### 2. Prueba de Estrés 4-Way a 400 Unidades Concurrentes (`100`/equipo, `seed=100`, 1200 ticks)
+
+Bajo congestión extrema, el ranking se invierte a favor de los mecanismos económicos de control de congestión (**COLMENA** y **CUERVO**), manteniendo las cuatro facciones muy por debajo del presupuesto de tiempo real (`< 40 ms/turno`):
+
+| Facción | Pos. | Ratio | Hielo (u.) | Batería (%) | Activas (/100) | Media (ms) | `p99` (ms) | Máx (ms) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **COLMENA** | **1.º** | **0.01877** | **193** | **10282.0** | **81** | 1.804 | **8.336** | 25.741 |
+| **CUERVO** | 2.º | 0.01524 | 168 | 11022.5 | 75 | 1.920 | 12.195 | 14.926 |
+| **RAVAGERS** | 3.º | 0.01354 | 156 | 11524.5 | 66 | **1.118** | 9.648 | **14.796** |
+| **LA AGENCIA** | 4.º | 0.00973 | 115 | 11816.0 | 70 | 1.698 | 15.699 | 21.314 |
+
+![Eficiencia y Escalabilidad 200 vs 400u](informe/figuras/torneo_4way_eficiencia.png)
+
+### 3. Benchmark Base (`benchmark_equipoP.py`, LA AGENCIA vs. 3 `EquipoBase`, 10 partidas)
 
 - **1.º lugar en 10/10 partidas** (`100%` de victorias).
 - **Ratio promedio:** `0.02545` frente a `0.01563` del mejor oponente base (**`+62.8%`**).
 - **Pico de rendimiento:** `0.0341` con `206 u.` de hielo depositado (Partida 3, semilla `134`).
-- **Latencia en tiempo real (`< 40 ms/tick`):**
-  - `200` unidades (`50`/equipo): media `1.221 ms`, `p99 = 11.184 ms` (`100%` bajo 40 ms).
-  - `400` unidades (`100`/equipo): media `5.650 ms`, `p99 = 32.215 ms` (`99.8%` bajo 36 ms).
-
-![Resultados del Torneo](informe/figuras/torneo_ratio.png)
+- **Ablaciones verificadas (`seed=100`):** Filtros FIPA-ACL bloquean `7611` envíos (`-32.8%` mensajes, `+6.1%` Ratio); CNP evita `68` desplazamientos duplicados; cobertura alcanza `84.0%` en 50 ticks.
 
 ---
 
-## Arquitectura Modular (6 Capas)
+## Arquitectura Modular de Referencia (6 Capas)
 
 ```mermaid
 flowchart LR
-    S1["1. Percepción y Memoria<br/>(MemoriaAgente, decay λ=0.015)"] --> S3["3. Router FIPA-ACL<br/>(Filtros, cooldown, dedup)"]
-    S3 --> S4["4. Subastas CNP<br/>(CFP, PROPOSE, ACCEPT)"]
+    S1["1. Percepción y Memoria<br/>(Creencias privadas, decay)"] --> S3["3. Router FIPA-ACL<br/>(Filtros, cooldown, lotes)"]
+    S3 --> S4["4. Subastas / Coord.<br/>(CNP / Vickrey / Triaje)"]
     S1 --> S2["2. Utilidad U(s,a) y FSM<br/>(A* acotado, carroña)"]
-    S3 --> S5["5. Gobernanza AutoGen<br/>(2 rondas + Copeland)"]
+    S3 --> S5["5. Elección Social<br/>(AutoGen / Condorcet / Aprob.)"]
     S4 --> S2
     S5 --> S2
     S2 --> S6["6. Profiling y Caché O(1)<br/>(time.perf_counter)"]
 ```
-
-1. **Percepción y Memoria Espacial Individual (`MemoriaAgente`)**:
-   - Creencias locales $O(1)$ para vetas de hielo (decaimiento exponencial $c(t) = e^{-0.015\Delta t}$, expiración a 120 ticks), restos energéticos (TTL 70 ticks) y tormentas con estimación de velocidad lineal $(v_x, v_y)$.
-   - Invalidación activa dentro del radio de visión (`r=5` rovers, `r=9` exploradores, `r=7` recargadores).
-   - Particionamiento dinámico de la grilla `60×45` con barrido compacto de 3 *waypoints* (`84.0%` de cobertura acumulada en los primeros 50 ticks).
-2. **Utilidad Multi-Atributo, FSM por Rol y A\* Acotado**:
-   - Máquinas de estados finitos explícitas: `EstadoRover`, `EstadoExplorador`, `EstadoRecargador`.
-   - Función de utilidad $U(s, a) = w_1\hat{g}_{\text{hielo}} - w_2\hat{c}_{\text{despl}} + w_3\hat{o}_{\text{carroña}} - w_4\hat{r}_{\text{tormenta}}$ calibrada mediante **RL Policy Search (Cross-Entropy Method paralelo)**.
-   - Vía rápida $O(1)$ sin tormentas y **A\* 8-direccional acotado a 28 expansiones** cuando una tormenta amenaza la ruta.
-3. **Comunicación Estructurada FIPA-ACL**:
-   - 8 performativas (`REQUEST`, `INFORM`, `CFP`, `PROPOSE`, `ACCEPT_PROPOSAL`, `REJECT_PROPOSAL`, `AGREE`, `FAILURE`) sobre 4 ontologías (`resource-discovery`, `rescue-ops`, `cnp-task`, `governance`).
-   - Filtros anti-saturación que bloquean miles de envíos redundantes (`-32.8%` mensajes, `+6.1%` Ratio).
-4. **Coordinación Contract Net Protocol (CNP)**:
-   - Subastas descentralizadas con preselección de hasta $K=2$ candidatos y reservas temporales (`TTL=32` ticks) que evitan colisiones de rutas (`68` desplazamientos duplicados evitados en `seed=100`).
-5. **Gobernanza Colectiva (Consenso tipo AutoGen + Copeland)**:
-   - Deliberación no bloqueante (`< 0.2 ms`) cada 45 ticks entre 4 roles (`ExploradorJefe`, `OficialLogistica`, `OficialSeguridad`, `ModeradorConsenso`) en 2 rondas + desempate por puntuación de **Copeland** sobre 4 políticas globales (`EXPANSION_AGRESIVA`, `AHORRO_ENERGETICO`, `SUPERVIVENCIA_CARRONA`, `REPLIEGUE_FINAL`).
-6. **Arquitectura No Bloqueante y Profiling**:
-   - Cero `time.sleep`, cero I/O síncrono, estructuras $O(1)$ amortizadas e instrumentación interna con `time.perf_counter()`.
 
 ---
 
@@ -64,17 +79,19 @@ flowchart LR
 .
 ├── simulador.py              # Motor gráfico y lógico de la simulación en Marte (Pygame)
 ├── equipo_base.py            # Clase base EquipoBase, constantes y contrato de percepción/comms
-├── equipoA.py                # Implementación completa de LA AGENCIA (6 capas)
-├── equipoB.py                # Equipo rival base B
-├── equipoC.py                # Equipo rival base C
-├── equipoD.py                # Equipo rival base D
-├── benchmark_torneo.py       # Suite de torneo multi-semilla, ablaciones, profiling y generación de figuras
-├── benchmark_equipoP.py      # Benchmark comparativo adicional
+├── equipoA.py                # LA AGENCIA — 6 capas modulares + RL-CEM + CNP + AutoGen/Copeland
+├── equipoB.py                # RAVAGERS — Blitz Central Agresivo + FIPA-ACL ligero + Modo Reposo
+├── equipoC.py                # COLMENA — Anillos concéntricos + Batch Digest + Vickrey + Condorcet
+├── equipoD.py                # CUERVO — Rival-aware 5x5 + Race Check + Hook D + CNP dual + Aprobación
+├── benchmark_torneo.py       # Suite oficial 4-Way (8 semillas rotadas + estrés 400u + pruebas unitarias)
+├── benchmark_equipoP.py      # Suite base LA AGENCIA vs. 3 EquipoBase (10 semillas, ablaciones y profiling)
 ├── entrenar_la_agencia.py    # Calibración offline de hiperparámetros vía RL-CEM paralelo
 ├── Enunciado.pdf             # Enunciado oficial del proyecto
 ├── informe/                  # Informe técnico LaTeX/PDF, resultados JSON y figuras
 │   ├── Informe_EquipoA.pdf
 │   ├── Informe_EquipoA.tex
+│   ├── resultados_torneo_4way.json
+│   ├── resultados_experimentos.json
 │   ├── figuras/
 │   └── *.json
 ├── requirements.txt
@@ -109,10 +126,14 @@ python simulador.py
 - `R`: Reiniciar partida
 - `ESC`: Salir
 
-### 3. Reproducir benchmarks y figuras
+### 3. Reproducir benchmarks
 
 ```bash
-python benchmark_torneo.py
+# Torneo oficial 4-Way (verificación rápida + 8 partidas rotadas + estrés 400u)
+python benchmark_torneo.py --quick --full
+
+# Suite base de LA AGENCIA vs. 3 EquipoBase (10 partidas, ablaciones y figuras)
+python benchmark_equipoP.py --quick --full
 ```
 
 ### 4. Re-entrenar pesos con RL-CEM paralelo
@@ -125,7 +146,7 @@ python entrenar_la_agencia.py
 
 ## Informe Técnico y Evidencia Experimental
 
-Todos los detalles matemáticos, diagramas de secuencia, pruebas de ablación (FIPA-ACL, CNP, RL-CEM) y resultados crudos en JSON se encuentran en [`informe/`](informe/README.md), incluyendo el documento compilado [`informe/Informe_EquipoA.pdf`](informe/Informe_EquipoA.pdf).
+Todos los detalles matemáticos, diagramas TikZ, comparativa de los 4 equipos, pruebas de ablación y resultados crudos en JSON se encuentran en [`informe/`](informe/README.md), incluyendo el documento compilado [`informe/Informe_EquipoA.pdf`](informe/Informe_EquipoA.pdf).
 
 ---
 
