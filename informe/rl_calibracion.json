@@ -1,0 +1,41 @@
+{
+  "mejores_parametros": {
+    "w1": 3.3547,
+    "w2": 0.2832,
+    "w3": 1.4418,
+    "w4": 2.4621,
+    "chain_bonus": 1.6423,
+    "min_ice_ahorro": 2.1201
+  },
+  "mejor_ratio_eval": 0.028005464480874317,
+  "historial": [
+    {
+      "generacion": 1,
+      "mejor_gen": 0.02716,
+      "media_elite": 0.02695,
+      "media_pob": 0.02482,
+      "mejor_global": 0.02716
+    },
+    {
+      "generacion": 2,
+      "mejor_gen": 0.02535,
+      "media_elite": 0.02516,
+      "media_pob": 0.02368,
+      "mejor_global": 0.02716
+    },
+    {
+      "generacion": 3,
+      "mejor_gen": 0.02772,
+      "media_elite": 0.02577,
+      "media_pob": 0.02462,
+      "mejor_global": 0.02772
+    },
+    {
+      "generacion": 4,
+      "mejor_gen": 0.02801,
+      "media_elite": 0.0273,
+      "media_pob": 0.02546,
+      "mejor_global": 0.02801
+    }
+  ]
+}

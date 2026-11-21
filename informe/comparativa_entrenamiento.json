@@ -1,0 +1,182 @@
+{
+  "tiempo_total_s": 573.68,
+  "params_sin_entrenar": {
+    "w1": 3.4,
+    "w2": 0.42,
+    "w3": 1.65,
+    "w4": 2.9,
+    "chain_bonus": 1.35,
+    "chain_radius": 12.0,
+    "min_ice_ahorro": 3.0,
+    "cooldown_hielo": 180.0,
+    "cnp_min_cant": 3.0,
+    "expl_paso_post": 2.0,
+    "expl_tick_standby": 9999.0,
+    "rover_tick_expl": 240.0
+  },
+  "params_entrenados": {
+    "w1": 3.9158,
+    "w2": 0.1501,
+    "w3": 1.65,
+    "w4": 2.2813,
+    "chain_bonus": 1.503,
+    "chain_radius": 13.0001,
+    "min_ice_ahorro": 3.0,
+    "cooldown_hielo": 370.2639,
+    "cnp_min_cant": 4.1514,
+    "expl_paso_post": 5.4868,
+    "expl_tick_standby": 261.8984,
+    "rover_tick_expl": 171.0141
+  },
+  "historial_cem": [
+    {
+      "gen": 1,
+      "mejor_robusto_gen": 0.02419,
+      "mejor_media_gen": 0.02565,
+      "media_elite": 0.02284,
+      "mejor_global": 0.02419
+    },
+    {
+      "gen": 2,
+      "mejor_robusto_gen": 0.02346,
+      "mejor_media_gen": 0.02479,
+      "media_elite": 0.02315,
+      "mejor_global": 0.02419
+    },
+    {
+      "gen": 3,
+      "mejor_robusto_gen": 0.0229,
+      "mejor_media_gen": 0.02425,
+      "media_elite": 0.02272,
+      "mejor_global": 0.02419
+    },
+    {
+      "gen": 4,
+      "mejor_robusto_gen": 0.02385,
+      "mejor_media_gen": 0.02449,
+      "media_elite": 0.02363,
+      "mejor_global": 0.02419
+    },
+    {
+      "gen": 5,
+      "mejor_robusto_gen": 0.02455,
+      "mejor_media_gen": 0.02552,
+      "media_elite": 0.02419,
+      "mejor_global": 0.02455
+    }
+  ],
+  "sin_entrenar": {
+    "ratio_prom": 0.022801469215182956,
+    "recursos_prom": 181.5,
+    "bateria_prom": 7994.125,
+    "activas_prom": 32.75,
+    "mensajes_prom": 1967.25,
+    "mean_ms_prom": 1.80708072463648,
+    "max_ms_max": 23.80160056054592,
+    "victorias": 4,
+    "total_partidas": 4,
+    "detalle": [
+      {
+        "seed": 101,
+        "pos": 1,
+        "ratio": 0.0219846957366695,
+        "recursos": 181,
+        "bateria": 8233.0,
+        "activas": 34,
+        "mensajes": 2044,
+        "mean_ms": 1.6224656046439672,
+        "max_ms": 23.392999544739723
+      },
+      {
+        "seed": 202,
+        "pos": 1,
+        "ratio": 0.027344011795456067,
+        "recursos": 204,
+        "bateria": 7460.5,
+        "activas": 33,
+        "mensajes": 1842,
+        "mean_ms": 1.994060376290746,
+        "max_ms": 23.602498695254326
+      },
+      {
+        "seed": 303,
+        "pos": 1,
+        "ratio": 0.020607038669232202,
+        "recursos": 166,
+        "bateria": 8055.5,
+        "activas": 34,
+        "mensajes": 2094,
+        "mean_ms": 1.8829886347723694,
+        "max_ms": 18.712099641561508
+      },
+      {
+        "seed": 404,
+        "pos": 1,
+        "ratio": 0.02127013065937405,
+        "recursos": 175,
+        "bateria": 8227.5,
+        "activas": 30,
+        "mensajes": 1889,
+        "mean_ms": 1.7288082828388374,
+        "max_ms": 23.80160056054592
+      }
+    ]
+  },
+  "entrenado": {
+    "ratio_prom": 0.02299550396731281,
+    "recursos_prom": 176.25,
+    "bateria_prom": 7710.5,
+    "activas_prom": 31.5,
+    "mensajes_prom": 1839.25,
+    "mean_ms_prom": 1.9448650440654123,
+    "max_ms_max": 33.40430045500398,
+    "victorias": 4,
+    "total_partidas": 4,
+    "detalle": [
+      {
+        "seed": 101,
+        "pos": 1,
+        "ratio": 0.024463519313304722,
+        "recursos": 171,
+        "bateria": 6990.0,
+        "activas": 34,
+        "mensajes": 1872,
+        "mean_ms": 1.8700858341291056,
+        "max_ms": 33.40430045500398
+      },
+      {
+        "seed": 202,
+        "pos": 1,
+        "ratio": 0.028447823807026745,
+        "recursos": 217,
+        "bateria": 7628.0,
+        "activas": 30,
+        "mensajes": 1721,
+        "mean_ms": 2.17027458820286,
+        "max_ms": 28.584500774741173
+      },
+      {
+        "seed": 303,
+        "pos": 1,
+        "ratio": 0.019337016574585635,
+        "recursos": 154,
+        "bateria": 7964.0,
+        "activas": 28,
+        "mensajes": 1816,
+        "mean_ms": 1.8727558196394924,
+        "max_ms": 26.369799859821796
+      },
+      {
+        "seed": 404,
+        "pos": 1,
+        "ratio": 0.01973365617433414,
+        "recursos": 163,
+        "bateria": 8260.0,
+        "activas": 34,
+        "mensajes": 1948,
+        "mean_ms": 1.8663439342901915,
+        "max_ms": 26.47219831123948
+      }
+    ]
+  }
+}
