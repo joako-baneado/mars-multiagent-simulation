@@ -1,0 +1,2286 @@
+{
+  "sha256": {
+    "simulador.py": "04bc483d5794e264d2a146429ef5f47644ce0fe58ff461cf41c37c49933d3f89",
+    "equipo_base.py": "9280dd328c5c49ab383f825c391eed33387e9e9ad4207efdeefe0fbb258a1de7"
+  },
+  "seeds": [
+    100,
+    117,
+    134,
+    151,
+    168,
+    185,
+    202,
+    219
+  ],
+  "partidas": [
+    {
+      "seed": 100,
+      "rotacion": 0,
+      "ticks": 1600,
+      "fase_final": false,
+      "hielo_restante": 81,
+      "ranking": [
+        {
+          "letra": "C",
+          "nombre": "COLMENA",
+          "color": [
+            245,
+            205,
+            30
+          ],
+          "recursos": 133,
+          "bateria": 5523.5,
+          "ratio": 0.024078935457590295,
+          "activas": 45,
+          "muertas": 5
+        },
+        {
+          "letra": "D",
+          "nombre": "CUERVO",
+          "color": [
+            235,
+            55,
+            165
+          ],
+          "recursos": 165,
+          "bateria": 6881.5,
+          "ratio": 0.023977330523868343,
+          "activas": 44,
+          "muertas": 6
+        },
+        {
+          "letra": "B",
+          "nombre": "RAVAGERS",
+          "color": [
+            55,
+            130,
+            255
+          ],
+          "recursos": 164,
+          "bateria": 7186.5,
+          "ratio": 0.022820566339664648,
+          "activas": 20,
+          "muertas": 30
+        },
+        {
+          "letra": "A",
+          "nombre": "LA AGENCIA",
+          "color": [
+            255,
+            120,
+            25
+          ],
+          "recursos": 154,
+          "bateria": 7116.5,
+          "ratio": 0.021639851050375886,
+          "activas": 33,
+          "muertas": 17
+        }
+      ],
+      "por_nombre": {
+        "COLMENA": {
+          "letra": "C",
+          "posicion": 1,
+          "ratio": 0.024078935457590295,
+          "recursos": 133,
+          "bateria": 5523.5,
+          "activas": 45,
+          "muertas": 5,
+          "profiling": {
+            "mean_ms": 1.0487605624575735,
+            "p95_ms": 2.3347999922407325,
+            "p99_ms": 3.656299997601309,
+            "max_ms": 7.461199991666945,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 925,
+              "bloqueados_filtro": 497,
+              "lotes_emitidos": 179,
+              "vetas_empaquetadas": 469,
+              "por_performativa": {
+                "CFP": 332,
+                "PROPOSE": 177,
+                "ACCEPT_PROPOSAL": 109,
+                "REJECT_PROPOSAL": 68,
+                "INFORM": 184,
+                "REQUEST": 38,
+                "AGREE": 17
+              },
+              "por_ontologia": {
+                "vickrey-bundle": 686,
+                "ring-discovery": 89,
+                "ring-governance": 95,
+                "rescue-triage": 55
+              }
+            },
+            "vickrey": {
+              "cfp_lote_enviados": 330,
+              "cfp_rescate_enviados": 2,
+              "propose_recibidos": 177,
+              "accept_enviados": 109,
+              "reject_enviados": 68,
+              "duplicados_evitados": 68
+            },
+            "votaciones": 61,
+            "transiciones_fsm": 24
+          },
+          "compartidos_vacios": true
+        },
+        "CUERVO": {
+          "letra": "D",
+          "posicion": 2,
+          "ratio": 0.023977330523868343,
+          "recursos": 165,
+          "bateria": 6881.5,
+          "activas": 44,
+          "muertas": 6,
+          "profiling": {
+            "mean_ms": 1.022462937498858,
+            "p95_ms": 3.3617999924899777,
+            "p99_ms": 5.9347999977035215,
+            "max_ms": 8.125200001813937,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1288,
+              "bloqueados_filtro": 21566,
+              "bloqueados_presion": 593,
+              "por_performativa": {
+                "INFORM": 460,
+                "CFP": 607,
+                "PROPOSE": 82,
+                "ACCEPT_PROPOSAL": 58,
+                "REJECT_PROPOSAL": 24,
+                "REQUEST": 35,
+                "AGREE": 22
+              },
+              "por_ontologia": {
+                "stealth-intel": 369,
+                "cnp-dual": 771,
+                "cuervo-gov": 91,
+                "rescue-ops": 57
+              }
+            },
+            "cnp": {
+              "cfp_hielo": 583,
+              "cfp_carrona": 16,
+              "cfp_rescate": 8,
+              "propose_recibidos": 82,
+              "accept_enviados": 58,
+              "reject_enviados": 24,
+              "duplicados_evitados": 24
+            },
+            "hook_d": {
+              "evaluaciones_con_rivales": 0,
+              "interrupciones_veta": 0,
+              "interrupciones_evasion": 0,
+              "consumos_mantenidos": 0
+            },
+            "votaciones": 35,
+            "transiciones_fsm": 26
+          },
+          "compartidos_vacios": true
+        },
+        "RAVAGERS": {
+          "letra": "B",
+          "posicion": 3,
+          "ratio": 0.022820566339664648,
+          "recursos": 164,
+          "bateria": 7186.5,
+          "activas": 20,
+          "muertas": 30,
+          "profiling": {
+            "mean_ms": 0.5159749375388856,
+            "p95_ms": 2.8842999981861794,
+            "p99_ms": 7.167299998400267,
+            "max_ms": 10.237700002107886,
+            "mensajes": 701
+          },
+          "compartidos_vacios": true
+        },
+        "LA AGENCIA": {
+          "letra": "A",
+          "posicion": 4,
+          "ratio": 0.021639851050375886,
+          "recursos": 154,
+          "bateria": 7116.5,
+          "activas": 33,
+          "muertas": 17,
+          "profiling": {
+            "mean_ms": 0.7723145626675887,
+            "p95_ms": 2.41420000565995,
+            "p99_ms": 7.130899999538087,
+            "max_ms": 13.695399993594037,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1416,
+              "bloqueados_filtro": 8784,
+              "por_performativa": {
+                "CFP": 619,
+                "PROPOSE": 169,
+                "ACCEPT_PROPOSAL": 101,
+                "REJECT_PROPOSAL": 68,
+                "INFORM": 404,
+                "AGREE": 40,
+                "REQUEST": 15
+              },
+              "por_ontologia": {
+                "cnp-task": 957,
+                "resource-discovery": 364,
+                "governance": 40,
+                "rescue-ops": 55
+              }
+            },
+            "cnp": {
+              "cfp_enviados": 619,
+              "propose_recibidos": 169,
+              "accept_enviados": 101,
+              "reject_enviados": 68,
+              "duplicados_evitados": 77
+            },
+            "consensos": 13,
+            "transiciones_fsm": 31
+          },
+          "compartidos_vacios": true
+        }
+      }
+    },
+    {
+      "seed": 117,
+      "rotacion": 1,
+      "ticks": 1600,
+      "fase_final": false,
+      "hielo_restante": 79,
+      "ranking": [
+        {
+          "letra": "A",
+          "nombre": "RAVAGERS",
+          "color": [
+            255,
+            120,
+            25
+          ],
+          "recursos": 178,
+          "bateria": 6359.0,
+          "ratio": 0.027991822613618492,
+          "activas": 34,
+          "muertas": 16
+        },
+        {
+          "letra": "B",
+          "nombre": "COLMENA",
+          "color": [
+            55,
+            130,
+            255
+          ],
+          "recursos": 146,
+          "bateria": 7188.5,
+          "ratio": 0.02031021770884051,
+          "activas": 34,
+          "muertas": 16
+        },
+        {
+          "letra": "D",
+          "nombre": "LA AGENCIA",
+          "color": [
+            235,
+            55,
+            165
+          ],
+          "recursos": 158,
+          "bateria": 7809.5,
+          "ratio": 0.02023176899929573,
+          "activas": 19,
+          "muertas": 31
+        },
+        {
+          "letra": "C",
+          "nombre": "CUERVO",
+          "color": [
+            245,
+            205,
+            30
+          ],
+          "recursos": 113,
+          "bateria": 7554.5,
+          "ratio": 0.014957972069627375,
+          "activas": 36,
+          "muertas": 14
+        }
+      ],
+      "por_nombre": {
+        "RAVAGERS": {
+          "letra": "A",
+          "posicion": 1,
+          "ratio": 0.027991822613618492,
+          "recursos": 178,
+          "bateria": 6359.0,
+          "activas": 34,
+          "muertas": 16,
+          "profiling": {
+            "mean_ms": 0.4676662501060491,
+            "p95_ms": 1.8565999944257783,
+            "p99_ms": 6.9480999882216565,
+            "max_ms": 13.372900000831578,
+            "mensajes": 749
+          },
+          "compartidos_vacios": true
+        },
+        "COLMENA": {
+          "letra": "B",
+          "posicion": 2,
+          "ratio": 0.02031021770884051,
+          "recursos": 146,
+          "bateria": 7188.5,
+          "activas": 34,
+          "muertas": 16,
+          "profiling": {
+            "mean_ms": 1.0291477501675672,
+            "p95_ms": 3.0744000086997403,
+            "p99_ms": 7.054500001686392,
+            "max_ms": 13.576700010162313,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 971,
+              "bloqueados_filtro": 6001,
+              "lotes_emitidos": 205,
+              "vetas_empaquetadas": 558,
+              "por_performativa": {
+                "CFP": 405,
+                "PROPOSE": 157,
+                "ACCEPT_PROPOSAL": 100,
+                "REJECT_PROPOSAL": 51,
+                "INFORM": 194,
+                "REQUEST": 41,
+                "AGREE": 23
+              },
+              "por_ontologia": {
+                "vickrey-bundle": 713,
+                "ring-discovery": 152,
+                "ring-governance": 42,
+                "rescue-triage": 64
+              }
+            },
+            "vickrey": {
+              "cfp_lote_enviados": 398,
+              "cfp_rescate_enviados": 7,
+              "propose_recibidos": 151,
+              "accept_enviados": 100,
+              "reject_enviados": 51,
+              "duplicados_evitados": 51
+            },
+            "votaciones": 33,
+            "transiciones_fsm": 29
+          },
+          "compartidos_vacios": true
+        },
+        "LA AGENCIA": {
+          "letra": "D",
+          "posicion": 3,
+          "ratio": 0.02023176899929573,
+          "recursos": 158,
+          "bateria": 7809.5,
+          "activas": 19,
+          "muertas": 31,
+          "profiling": {
+            "mean_ms": 0.8502047499518994,
+            "p95_ms": 3.2922000009421026,
+            "p99_ms": 7.5837999993382255,
+            "max_ms": 11.730799998986186,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1406,
+              "bloqueados_filtro": 8694,
+              "por_performativa": {
+                "CFP": 518,
+                "INFORM": 479,
+                "PROPOSE": 178,
+                "ACCEPT_PROPOSAL": 116,
+                "REJECT_PROPOSAL": 62,
+                "AGREE": 36,
+                "REQUEST": 17
+              },
+              "por_ontologia": {
+                "cnp-task": 874,
+                "resource-discovery": 382,
+                "rescue-ops": 53,
+                "governance": 97
+              }
+            },
+            "cnp": {
+              "cfp_enviados": 518,
+              "propose_recibidos": 178,
+              "accept_enviados": 116,
+              "reject_enviados": 62,
+              "duplicados_evitados": 65
+            },
+            "consensos": 34,
+            "transiciones_fsm": 32
+          },
+          "compartidos_vacios": true
+        },
+        "CUERVO": {
+          "letra": "C",
+          "posicion": 4,
+          "ratio": 0.014957972069627375,
+          "recursos": 113,
+          "bateria": 7554.5,
+          "activas": 36,
+          "muertas": 14,
+          "profiling": {
+            "mean_ms": 0.9285000000534183,
+            "p95_ms": 2.669300001798547,
+            "p99_ms": 5.480400002852548,
+            "max_ms": 9.671999996498926,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1222,
+              "bloqueados_filtro": 16294,
+              "bloqueados_presion": 1478,
+              "por_performativa": {
+                "CFP": 518,
+                "PROPOSE": 91,
+                "ACCEPT_PROPOSAL": 61,
+                "REJECT_PROPOSAL": 30,
+                "INFORM": 451,
+                "REQUEST": 45,
+                "AGREE": 26
+              },
+              "por_ontologia": {
+                "cnp-dual": 700,
+                "stealth-intel": 368,
+                "cuervo-gov": 83,
+                "rescue-ops": 71
+              }
+            },
+            "cnp": {
+              "cfp_hielo": 506,
+              "cfp_carrona": 6,
+              "cfp_rescate": 6,
+              "propose_recibidos": 91,
+              "accept_enviados": 61,
+              "reject_enviados": 30,
+              "duplicados_evitados": 30
+            },
+            "hook_d": {
+              "evaluaciones_con_rivales": 0,
+              "interrupciones_veta": 0,
+              "interrupciones_evasion": 0,
+              "consumos_mantenidos": 0
+            },
+            "votaciones": 35,
+            "transiciones_fsm": 33
+          },
+          "compartidos_vacios": true
+        }
+      }
+    },
+    {
+      "seed": 134,
+      "rotacion": 2,
+      "ticks": 1600,
+      "fase_final": false,
+      "hielo_restante": 59,
+      "ranking": [
+        {
+          "letra": "D",
+          "nombre": "RAVAGERS",
+          "color": [
+            235,
+            55,
+            165
+          ],
+          "recursos": 166,
+          "bateria": 6437.5,
+          "ratio": 0.02578640776699029,
+          "activas": 24,
+          "muertas": 26
+        },
+        {
+          "letra": "C",
+          "nombre": "LA AGENCIA",
+          "color": [
+            245,
+            205,
+            30
+          ],
+          "recursos": 211,
+          "bateria": 8958.5,
+          "ratio": 0.02355305017581068,
+          "activas": 26,
+          "muertas": 24
+        },
+        {
+          "letra": "B",
+          "nombre": "CUERVO",
+          "color": [
+            55,
+            130,
+            255
+          ],
+          "recursos": 166,
+          "bateria": 7124.0,
+          "ratio": 0.02330151600224593,
+          "activas": 41,
+          "muertas": 9
+        },
+        {
+          "letra": "A",
+          "nombre": "COLMENA",
+          "color": [
+            255,
+            120,
+            25
+          ],
+          "recursos": 138,
+          "bateria": 5928.0,
+          "ratio": 0.02327935222672065,
+          "activas": 46,
+          "muertas": 4
+        }
+      ],
+      "por_nombre": {
+        "RAVAGERS": {
+          "letra": "D",
+          "posicion": 1,
+          "ratio": 0.02578640776699029,
+          "recursos": 166,
+          "bateria": 6437.5,
+          "activas": 24,
+          "muertas": 26,
+          "profiling": {
+            "mean_ms": 0.6096558749970882,
+            "p95_ms": 2.803799998218892,
+            "p99_ms": 6.71340000735654,
+            "max_ms": 12.718899992250954,
+            "mensajes": 760
+          },
+          "compartidos_vacios": true
+        },
+        "LA AGENCIA": {
+          "letra": "C",
+          "posicion": 2,
+          "ratio": 0.02355305017581068,
+          "recursos": 211,
+          "bateria": 8958.5,
+          "activas": 26,
+          "muertas": 24,
+          "profiling": {
+            "mean_ms": 0.8432526875139956,
+            "p95_ms": 3.20099999953527,
+            "p99_ms": 6.117799995990936,
+            "max_ms": 12.17489999908139,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1539,
+              "bloqueados_filtro": 9624,
+              "por_performativa": {
+                "CFP": 635,
+                "INFORM": 472,
+                "PROPOSE": 169,
+                "ACCEPT_PROPOSAL": 102,
+                "REJECT_PROPOSAL": 67,
+                "AGREE": 61,
+                "REQUEST": 33
+              },
+              "por_ontologia": {
+                "cnp-task": 973,
+                "resource-discovery": 421,
+                "governance": 51,
+                "rescue-ops": 94
+              }
+            },
+            "cnp": {
+              "cfp_enviados": 635,
+              "propose_recibidos": 169,
+              "accept_enviados": 102,
+              "reject_enviados": 67,
+              "duplicados_evitados": 78
+            },
+            "consensos": 34,
+            "transiciones_fsm": 32
+          },
+          "compartidos_vacios": true
+        },
+        "CUERVO": {
+          "letra": "B",
+          "posicion": 3,
+          "ratio": 0.02330151600224593,
+          "recursos": 166,
+          "bateria": 7124.0,
+          "activas": 41,
+          "muertas": 9,
+          "profiling": {
+            "mean_ms": 0.9892228125465863,
+            "p95_ms": 2.7761999936046777,
+            "p99_ms": 6.747299998096423,
+            "max_ms": 13.10409999859985,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1295,
+              "bloqueados_filtro": 8197,
+              "bloqueados_presion": 497,
+              "por_performativa": {
+                "CFP": 540,
+                "PROPOSE": 138,
+                "ACCEPT_PROPOSAL": 89,
+                "REJECT_PROPOSAL": 49,
+                "INFORM": 410,
+                "AGREE": 30,
+                "REQUEST": 39
+              },
+              "por_ontologia": {
+                "cnp-dual": 816,
+                "stealth-intel": 311,
+                "cuervo-gov": 99,
+                "rescue-ops": 69
+              }
+            },
+            "cnp": {
+              "cfp_hielo": 506,
+              "cfp_carrona": 20,
+              "cfp_rescate": 14,
+              "propose_recibidos": 138,
+              "accept_enviados": 89,
+              "reject_enviados": 49,
+              "duplicados_evitados": 51
+            },
+            "hook_d": {
+              "evaluaciones_con_rivales": 0,
+              "interrupciones_veta": 0,
+              "interrupciones_evasion": 0,
+              "consumos_mantenidos": 0
+            },
+            "votaciones": 35,
+            "transiciones_fsm": 32
+          },
+          "compartidos_vacios": true
+        },
+        "COLMENA": {
+          "letra": "A",
+          "posicion": 4,
+          "ratio": 0.02327935222672065,
+          "recursos": 138,
+          "bateria": 5928.0,
+          "activas": 46,
+          "muertas": 4,
+          "profiling": {
+            "mean_ms": 1.0247706874395135,
+            "p95_ms": 2.390399997239001,
+            "p99_ms": 6.612099992707954,
+            "max_ms": 11.833299991849344,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 924,
+              "bloqueados_filtro": 2,
+              "lotes_emitidos": 174,
+              "vetas_empaquetadas": 526,
+              "por_performativa": {
+                "CFP": 354,
+                "PROPOSE": 199,
+                "ACCEPT_PROPOSAL": 127,
+                "REJECT_PROPOSAL": 72,
+                "INFORM": 119,
+                "REQUEST": 34,
+                "AGREE": 19
+              },
+              "por_ontologia": {
+                "vickrey-bundle": 752,
+                "ring-discovery": 52,
+                "ring-governance": 67,
+                "rescue-triage": 53
+              }
+            },
+            "vickrey": {
+              "cfp_lote_enviados": 348,
+              "cfp_rescate_enviados": 6,
+              "propose_recibidos": 199,
+              "accept_enviados": 127,
+              "reject_enviados": 72,
+              "duplicados_evitados": 72
+            },
+            "votaciones": 61,
+            "transiciones_fsm": 25
+          },
+          "compartidos_vacios": true
+        }
+      }
+    },
+    {
+      "seed": 151,
+      "rotacion": 3,
+      "ticks": 1600,
+      "fase_final": false,
+      "hielo_restante": 85,
+      "ranking": [
+        {
+          "letra": "B",
+          "nombre": "LA AGENCIA",
+          "color": [
+            55,
+            130,
+            255
+          ],
+          "recursos": 196,
+          "bateria": 7567.0,
+          "ratio": 0.025901942645698426,
+          "activas": 28,
+          "muertas": 22
+        },
+        {
+          "letra": "D",
+          "nombre": "COLMENA",
+          "color": [
+            235,
+            55,
+            165
+          ],
+          "recursos": 147,
+          "bateria": 6116.5,
+          "ratio": 0.024033352407422544,
+          "activas": 36,
+          "muertas": 14
+        },
+        {
+          "letra": "A",
+          "nombre": "CUERVO",
+          "color": [
+            255,
+            120,
+            25
+          ],
+          "recursos": 161,
+          "bateria": 8030.0,
+          "ratio": 0.02004981320049813,
+          "activas": 39,
+          "muertas": 11
+        },
+        {
+          "letra": "C",
+          "nombre": "RAVAGERS",
+          "color": [
+            245,
+            205,
+            30
+          ],
+          "recursos": 131,
+          "bateria": 6560.0,
+          "ratio": 0.01996951219512195,
+          "activas": 19,
+          "muertas": 31
+        }
+      ],
+      "por_nombre": {
+        "LA AGENCIA": {
+          "letra": "B",
+          "posicion": 1,
+          "ratio": 0.025901942645698426,
+          "recursos": 196,
+          "bateria": 7567.0,
+          "activas": 28,
+          "muertas": 22,
+          "profiling": {
+            "mean_ms": 0.825437500056978,
+            "p95_ms": 3.189399996699649,
+            "p99_ms": 6.969999994907994,
+            "max_ms": 11.169200006406754,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1467,
+              "bloqueados_filtro": 9275,
+              "por_performativa": {
+                "CFP": 578,
+                "PROPOSE": 167,
+                "ACCEPT_PROPOSAL": 107,
+                "REJECT_PROPOSAL": 60,
+                "INFORM": 489,
+                "AGREE": 46,
+                "REQUEST": 20
+              },
+              "por_ontologia": {
+                "cnp-task": 912,
+                "resource-discovery": 409,
+                "governance": 80,
+                "rescue-ops": 66
+              }
+            },
+            "cnp": {
+              "cfp_enviados": 578,
+              "propose_recibidos": 167,
+              "accept_enviados": 107,
+              "reject_enviados": 60,
+              "duplicados_evitados": 68
+            },
+            "consensos": 35,
+            "transiciones_fsm": 31
+          },
+          "compartidos_vacios": true
+        },
+        "COLMENA": {
+          "letra": "D",
+          "posicion": 2,
+          "ratio": 0.024033352407422544,
+          "recursos": 147,
+          "bateria": 6116.5,
+          "activas": 36,
+          "muertas": 14,
+          "profiling": {
+            "mean_ms": 1.0666931249932077,
+            "p95_ms": 2.948100000139675,
+            "p99_ms": 4.319899997426546,
+            "max_ms": 6.302100004177191,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1231,
+              "bloqueados_filtro": 3661,
+              "lotes_emitidos": 294,
+              "vetas_empaquetadas": 764,
+              "por_performativa": {
+                "CFP": 474,
+                "PROPOSE": 220,
+                "ACCEPT_PROPOSAL": 146,
+                "REJECT_PROPOSAL": 74,
+                "INFORM": 262,
+                "REQUEST": 38,
+                "AGREE": 17
+              },
+              "por_ontologia": {
+                "vickrey-bundle": 914,
+                "ring-discovery": 167,
+                "ring-governance": 95,
+                "rescue-triage": 55
+              }
+            },
+            "vickrey": {
+              "cfp_lote_enviados": 468,
+              "cfp_rescate_enviados": 6,
+              "propose_recibidos": 220,
+              "accept_enviados": 146,
+              "reject_enviados": 74,
+              "duplicados_evitados": 74
+            },
+            "votaciones": 61,
+            "transiciones_fsm": 26
+          },
+          "compartidos_vacios": true
+        },
+        "CUERVO": {
+          "letra": "A",
+          "posicion": 3,
+          "ratio": 0.02004981320049813,
+          "recursos": 161,
+          "bateria": 8030.0,
+          "activas": 39,
+          "muertas": 11,
+          "profiling": {
+            "mean_ms": 0.9836685000345824,
+            "p95_ms": 2.7757000061683357,
+            "p99_ms": 5.631899994114065,
+            "max_ms": 11.320400000840891,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1112,
+              "bloqueados_filtro": 16126,
+              "bloqueados_presion": 479,
+              "por_performativa": {
+                "CFP": 500,
+                "PROPOSE": 105,
+                "ACCEPT_PROPOSAL": 76,
+                "REJECT_PROPOSAL": 29,
+                "INFORM": 330,
+                "REQUEST": 44,
+                "AGREE": 28
+              },
+              "por_ontologia": {
+                "cnp-dual": 710,
+                "stealth-intel": 256,
+                "cuervo-gov": 74,
+                "rescue-ops": 72
+              }
+            },
+            "cnp": {
+              "cfp_hielo": 478,
+              "cfp_carrona": 14,
+              "cfp_rescate": 8,
+              "propose_recibidos": 105,
+              "accept_enviados": 76,
+              "reject_enviados": 29,
+              "duplicados_evitados": 29
+            },
+            "hook_d": {
+              "evaluaciones_con_rivales": 0,
+              "interrupciones_veta": 0,
+              "interrupciones_evasion": 0,
+              "consumos_mantenidos": 0
+            },
+            "votaciones": 35,
+            "transiciones_fsm": 32
+          },
+          "compartidos_vacios": true
+        },
+        "RAVAGERS": {
+          "letra": "C",
+          "posicion": 4,
+          "ratio": 0.01996951219512195,
+          "recursos": 131,
+          "bateria": 6560.0,
+          "activas": 19,
+          "muertas": 31,
+          "profiling": {
+            "mean_ms": 0.5263181875682221,
+            "p95_ms": 2.708500007429393,
+            "p99_ms": 7.25119999879098,
+            "max_ms": 10.118800011696294,
+            "mensajes": 816
+          },
+          "compartidos_vacios": true
+        }
+      }
+    },
+    {
+      "seed": 168,
+      "rotacion": 0,
+      "ticks": 1600,
+      "fase_final": false,
+      "hielo_restante": 28,
+      "ranking": [
+        {
+          "letra": "B",
+          "nombre": "RAVAGERS",
+          "color": [
+            55,
+            130,
+            255
+          ],
+          "recursos": 183,
+          "bateria": 6837.5,
+          "ratio": 0.02676416819012797,
+          "activas": 35,
+          "muertas": 15
+        },
+        {
+          "letra": "D",
+          "nombre": "CUERVO",
+          "color": [
+            235,
+            55,
+            165
+          ],
+          "recursos": 174,
+          "bateria": 6891.0,
+          "ratio": 0.025250326512842838,
+          "activas": 41,
+          "muertas": 9
+        },
+        {
+          "letra": "C",
+          "nombre": "COLMENA",
+          "color": [
+            245,
+            205,
+            30
+          ],
+          "recursos": 143,
+          "bateria": 5968.0,
+          "ratio": 0.02396112600536193,
+          "activas": 31,
+          "muertas": 19
+        },
+        {
+          "letra": "A",
+          "nombre": "LA AGENCIA",
+          "color": [
+            255,
+            120,
+            25
+          ],
+          "recursos": 172,
+          "bateria": 8029.0,
+          "ratio": 0.021422344002989164,
+          "activas": 24,
+          "muertas": 26
+        }
+      ],
+      "por_nombre": {
+        "RAVAGERS": {
+          "letra": "B",
+          "posicion": 1,
+          "ratio": 0.02676416819012797,
+          "recursos": 183,
+          "bateria": 6837.5,
+          "activas": 35,
+          "muertas": 15,
+          "profiling": {
+            "mean_ms": 0.5669965625327222,
+            "p95_ms": 2.898599990658113,
+            "p99_ms": 6.459200001700083,
+            "max_ms": 10.382500000559958,
+            "mensajes": 872
+          },
+          "compartidos_vacios": true
+        },
+        "CUERVO": {
+          "letra": "D",
+          "posicion": 2,
+          "ratio": 0.025250326512842838,
+          "recursos": 174,
+          "bateria": 6891.0,
+          "activas": 41,
+          "muertas": 9,
+          "profiling": {
+            "mean_ms": 1.0225081874125408,
+            "p95_ms": 3.0823999986751005,
+            "p99_ms": 5.856100002347375,
+            "max_ms": 8.795799993094988,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1200,
+              "bloqueados_filtro": 22223,
+              "bloqueados_presion": 598,
+              "por_performativa": {
+                "INFORM": 547,
+                "CFP": 530,
+                "PROPOSE": 30,
+                "ACCEPT_PROPOSAL": 24,
+                "REJECT_PROPOSAL": 6,
+                "AGREE": 23,
+                "REQUEST": 40
+              },
+              "por_ontologia": {
+                "stealth-intel": 469,
+                "cnp-dual": 590,
+                "cuervo-gov": 78,
+                "rescue-ops": 63
+              }
+            },
+            "cnp": {
+              "cfp_hielo": 522,
+              "cfp_carrona": 2,
+              "cfp_rescate": 6,
+              "propose_recibidos": 30,
+              "accept_enviados": 24,
+              "reject_enviados": 6,
+              "duplicados_evitados": 6
+            },
+            "hook_d": {
+              "evaluaciones_con_rivales": 0,
+              "interrupciones_veta": 0,
+              "interrupciones_evasion": 0,
+              "consumos_mantenidos": 0
+            },
+            "votaciones": 35,
+            "transiciones_fsm": 31
+          },
+          "compartidos_vacios": true
+        },
+        "COLMENA": {
+          "letra": "C",
+          "posicion": 3,
+          "ratio": 0.02396112600536193,
+          "recursos": 143,
+          "bateria": 5968.0,
+          "activas": 31,
+          "muertas": 19,
+          "profiling": {
+            "mean_ms": 0.8248295625844548,
+            "p95_ms": 2.2371000013663433,
+            "p99_ms": 4.244599998855847,
+            "max_ms": 6.575700002940721,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 889,
+              "bloqueados_filtro": 20,
+              "lotes_emitidos": 178,
+              "vetas_empaquetadas": 493,
+              "por_performativa": {
+                "CFP": 322,
+                "PROPOSE": 197,
+                "ACCEPT_PROPOSAL": 132,
+                "REJECT_PROPOSAL": 65,
+                "INFORM": 121,
+                "REQUEST": 36,
+                "AGREE": 16
+              },
+              "por_ontologia": {
+                "vickrey-bundle": 716,
+                "ring-discovery": 49,
+                "ring-governance": 72,
+                "rescue-triage": 52
+              }
+            },
+            "vickrey": {
+              "cfp_lote_enviados": 320,
+              "cfp_rescate_enviados": 2,
+              "propose_recibidos": 197,
+              "accept_enviados": 132,
+              "reject_enviados": 65,
+              "duplicados_evitados": 65
+            },
+            "votaciones": 61,
+            "transiciones_fsm": 25
+          },
+          "compartidos_vacios": true
+        },
+        "LA AGENCIA": {
+          "letra": "A",
+          "posicion": 4,
+          "ratio": 0.021422344002989164,
+          "recursos": 172,
+          "bateria": 8029.0,
+          "activas": 24,
+          "muertas": 26,
+          "profiling": {
+            "mean_ms": 0.8968824999806202,
+            "p95_ms": 2.9275000051711686,
+            "p99_ms": 10.356800004956312,
+            "max_ms": 17.41359999505221,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1397,
+              "bloqueados_filtro": 8425,
+              "por_performativa": {
+                "CFP": 577,
+                "PROPOSE": 172,
+                "ACCEPT_PROPOSAL": 96,
+                "REJECT_PROPOSAL": 76,
+                "INFORM": 393,
+                "AGREE": 49,
+                "REQUEST": 34
+              },
+              "por_ontologia": {
+                "cnp-task": 921,
+                "resource-discovery": 344,
+                "governance": 49,
+                "rescue-ops": 83
+              }
+            },
+            "cnp": {
+              "cfp_enviados": 577,
+              "propose_recibidos": 172,
+              "accept_enviados": 96,
+              "reject_enviados": 76,
+              "duplicados_evitados": 91
+            },
+            "consensos": 13,
+            "transiciones_fsm": 30
+          },
+          "compartidos_vacios": true
+        }
+      }
+    },
+    {
+      "seed": 185,
+      "rotacion": 1,
+      "ticks": 1600,
+      "fase_final": false,
+      "hielo_restante": 39,
+      "ranking": [
+        {
+          "letra": "D",
+          "nombre": "LA AGENCIA",
+          "color": [
+            235,
+            55,
+            165
+          ],
+          "recursos": 223,
+          "bateria": 8232.5,
+          "ratio": 0.027087761919222592,
+          "activas": 24,
+          "muertas": 26
+        },
+        {
+          "letra": "C",
+          "nombre": "CUERVO",
+          "color": [
+            245,
+            205,
+            30
+          ],
+          "recursos": 188,
+          "bateria": 7544.5,
+          "ratio": 0.02491881503081715,
+          "activas": 38,
+          "muertas": 12
+        },
+        {
+          "letra": "A",
+          "nombre": "RAVAGERS",
+          "color": [
+            255,
+            120,
+            25
+          ],
+          "recursos": 140,
+          "bateria": 6575.0,
+          "ratio": 0.02129277566539924,
+          "activas": 20,
+          "muertas": 30
+        },
+        {
+          "letra": "B",
+          "nombre": "COLMENA",
+          "color": [
+            55,
+            130,
+            255
+          ],
+          "recursos": 145,
+          "bateria": 8214.0,
+          "ratio": 0.017652787923058192,
+          "activas": 32,
+          "muertas": 18
+        }
+      ],
+      "por_nombre": {
+        "LA AGENCIA": {
+          "letra": "D",
+          "posicion": 1,
+          "ratio": 0.027087761919222592,
+          "recursos": 223,
+          "bateria": 8232.5,
+          "activas": 24,
+          "muertas": 26,
+          "profiling": {
+            "mean_ms": 0.8202262500310553,
+            "p95_ms": 3.289299993411987,
+            "p99_ms": 7.478200002879021,
+            "max_ms": 9.907700004987419,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1515,
+              "bloqueados_filtro": 11409,
+              "por_performativa": {
+                "CFP": 637,
+                "INFORM": 492,
+                "PROPOSE": 160,
+                "ACCEPT_PROPOSAL": 105,
+                "REJECT_PROPOSAL": 55,
+                "AGREE": 45,
+                "REQUEST": 21
+              },
+              "por_ontologia": {
+                "cnp-task": 957,
+                "resource-discovery": 451,
+                "governance": 41,
+                "rescue-ops": 66
+              }
+            },
+            "cnp": {
+              "cfp_enviados": 637,
+              "propose_recibidos": 160,
+              "accept_enviados": 105,
+              "reject_enviados": 55,
+              "duplicados_evitados": 65
+            },
+            "consensos": 14,
+            "transiciones_fsm": 34
+          },
+          "compartidos_vacios": true
+        },
+        "CUERVO": {
+          "letra": "C",
+          "posicion": 2,
+          "ratio": 0.02491881503081715,
+          "recursos": 188,
+          "bateria": 7544.5,
+          "activas": 38,
+          "muertas": 12,
+          "profiling": {
+            "mean_ms": 1.1640850000685532,
+            "p95_ms": 3.8273999944067327,
+            "p99_ms": 7.898000001659966,
+            "max_ms": 11.988499993094592,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1310,
+              "bloqueados_filtro": 12628,
+              "bloqueados_presion": 1065,
+              "por_performativa": {
+                "CFP": 491,
+                "PROPOSE": 130,
+                "ACCEPT_PROPOSAL": 82,
+                "REJECT_PROPOSAL": 48,
+                "INFORM": 479,
+                "REQUEST": 46,
+                "AGREE": 34
+              },
+              "por_ontologia": {
+                "cnp-dual": 751,
+                "stealth-intel": 332,
+                "cuervo-gov": 147,
+                "rescue-ops": 80
+              }
+            },
+            "cnp": {
+              "cfp_hielo": 473,
+              "cfp_carrona": 6,
+              "cfp_rescate": 12,
+              "propose_recibidos": 130,
+              "accept_enviados": 82,
+              "reject_enviados": 48,
+              "duplicados_evitados": 50
+            },
+            "hook_d": {
+              "evaluaciones_con_rivales": 0,
+              "interrupciones_veta": 0,
+              "interrupciones_evasion": 0,
+              "consumos_mantenidos": 0
+            },
+            "votaciones": 35,
+            "transiciones_fsm": 30
+          },
+          "compartidos_vacios": true
+        },
+        "RAVAGERS": {
+          "letra": "A",
+          "posicion": 3,
+          "ratio": 0.02129277566539924,
+          "recursos": 140,
+          "bateria": 6575.0,
+          "activas": 20,
+          "muertas": 30,
+          "profiling": {
+            "mean_ms": 0.5407691250877633,
+            "p95_ms": 2.1593999954347964,
+            "p99_ms": 6.349600009343703,
+            "max_ms": 12.001500001133536,
+            "mensajes": 754
+          },
+          "compartidos_vacios": true
+        },
+        "COLMENA": {
+          "letra": "B",
+          "posicion": 4,
+          "ratio": 0.017652787923058192,
+          "recursos": 145,
+          "bateria": 8214.0,
+          "activas": 32,
+          "muertas": 18,
+          "profiling": {
+            "mean_ms": 0.9901578123765375,
+            "p95_ms": 2.6697000012063654,
+            "p99_ms": 5.358299998988514,
+            "max_ms": 10.803300003317418,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1298,
+              "bloqueados_filtro": 2790,
+              "lotes_emitidos": 273,
+              "vetas_empaquetadas": 762,
+              "por_performativa": {
+                "CFP": 560,
+                "PROPOSE": 203,
+                "ACCEPT_PROPOSAL": 131,
+                "REJECT_PROPOSAL": 72,
+                "INFORM": 256,
+                "AGREE": 32,
+                "REQUEST": 44
+              },
+              "por_ontologia": {
+                "vickrey-bundle": 966,
+                "ring-discovery": 189,
+                "ring-governance": 67,
+                "rescue-triage": 76
+              }
+            },
+            "vickrey": {
+              "cfp_lote_enviados": 546,
+              "cfp_rescate_enviados": 14,
+              "propose_recibidos": 203,
+              "accept_enviados": 131,
+              "reject_enviados": 72,
+              "duplicados_evitados": 72
+            },
+            "votaciones": 61,
+            "transiciones_fsm": 30
+          },
+          "compartidos_vacios": true
+        }
+      }
+    },
+    {
+      "seed": 202,
+      "rotacion": 2,
+      "ticks": 1600,
+      "fase_final": false,
+      "hielo_restante": 5,
+      "ranking": [
+        {
+          "letra": "B",
+          "nombre": "CUERVO",
+          "color": [
+            55,
+            130,
+            255
+          ],
+          "recursos": 198,
+          "bateria": 6728.0,
+          "ratio": 0.029429250891795482,
+          "activas": 36,
+          "muertas": 14
+        },
+        {
+          "letra": "D",
+          "nombre": "RAVAGERS",
+          "color": [
+            235,
+            55,
+            165
+          ],
+          "recursos": 167,
+          "bateria": 6534.0,
+          "ratio": 0.025558616467707376,
+          "activas": 33,
+          "muertas": 17
+        },
+        {
+          "letra": "C",
+          "nombre": "LA AGENCIA",
+          "color": [
+            245,
+            205,
+            30
+          ],
+          "recursos": 200,
+          "bateria": 8150.5,
+          "ratio": 0.024538371879025828,
+          "activas": 24,
+          "muertas": 26
+        },
+        {
+          "letra": "A",
+          "nombre": "COLMENA",
+          "color": [
+            255,
+            120,
+            25
+          ],
+          "recursos": 143,
+          "bateria": 6442.5,
+          "ratio": 0.022196352347691115,
+          "activas": 40,
+          "muertas": 10
+        }
+      ],
+      "por_nombre": {
+        "CUERVO": {
+          "letra": "B",
+          "posicion": 1,
+          "ratio": 0.029429250891795482,
+          "recursos": 198,
+          "bateria": 6728.0,
+          "activas": 36,
+          "muertas": 14,
+          "profiling": {
+            "mean_ms": 1.0473917500894458,
+            "p95_ms": 3.3115999922301853,
+            "p99_ms": 8.314199996675598,
+            "max_ms": 11.94260000011127,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1215,
+              "bloqueados_filtro": 18609,
+              "bloqueados_presion": 394,
+              "por_performativa": {
+                "CFP": 463,
+                "PROPOSE": 84,
+                "ACCEPT_PROPOSAL": 61,
+                "REJECT_PROPOSAL": 23,
+                "INFORM": 517,
+                "REQUEST": 42,
+                "AGREE": 25
+              },
+              "por_ontologia": {
+                "cnp-dual": 631,
+                "stealth-intel": 394,
+                "rescue-ops": 67,
+                "cuervo-gov": 123
+              }
+            },
+            "cnp": {
+              "cfp_hielo": 439,
+              "cfp_carrona": 16,
+              "cfp_rescate": 8,
+              "propose_recibidos": 84,
+              "accept_enviados": 61,
+              "reject_enviados": 23,
+              "duplicados_evitados": 23
+            },
+            "hook_d": {
+              "evaluaciones_con_rivales": 0,
+              "interrupciones_veta": 0,
+              "interrupciones_evasion": 0,
+              "consumos_mantenidos": 0
+            },
+            "votaciones": 35,
+            "transiciones_fsm": 27
+          },
+          "compartidos_vacios": true
+        },
+        "RAVAGERS": {
+          "letra": "D",
+          "posicion": 2,
+          "ratio": 0.025558616467707376,
+          "recursos": 167,
+          "bateria": 6534.0,
+          "activas": 33,
+          "muertas": 17,
+          "profiling": {
+            "mean_ms": 0.4729758751022928,
+            "p95_ms": 2.4932000033004442,
+            "p99_ms": 6.05110000105924,
+            "max_ms": 9.925600006681634,
+            "mensajes": 755
+          },
+          "compartidos_vacios": true
+        },
+        "LA AGENCIA": {
+          "letra": "C",
+          "posicion": 3,
+          "ratio": 0.024538371879025828,
+          "recursos": 200,
+          "bateria": 8150.5,
+          "activas": 24,
+          "muertas": 26,
+          "profiling": {
+            "mean_ms": 0.8304141874918969,
+            "p95_ms": 2.867999997761217,
+            "p99_ms": 9.98049999725481,
+            "max_ms": 13.648799998918548,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1480,
+              "bloqueados_filtro": 7601,
+              "por_performativa": {
+                "CFP": 588,
+                "INFORM": 532,
+                "PROPOSE": 144,
+                "ACCEPT_PROPOSAL": 91,
+                "REJECT_PROPOSAL": 53,
+                "AGREE": 46,
+                "REQUEST": 26
+              },
+              "por_ontologia": {
+                "cnp-task": 876,
+                "resource-discovery": 443,
+                "governance": 89,
+                "rescue-ops": 72
+              }
+            },
+            "cnp": {
+              "cfp_enviados": 588,
+              "propose_recibidos": 144,
+              "accept_enviados": 91,
+              "reject_enviados": 53,
+              "duplicados_evitados": 63
+            },
+            "consensos": 35,
+            "transiciones_fsm": 30
+          },
+          "compartidos_vacios": true
+        },
+        "COLMENA": {
+          "letra": "A",
+          "posicion": 4,
+          "ratio": 0.022196352347691115,
+          "recursos": 143,
+          "bateria": 6442.5,
+          "activas": 40,
+          "muertas": 10,
+          "profiling": {
+            "mean_ms": 0.944795562490981,
+            "p95_ms": 2.7345000053173862,
+            "p99_ms": 5.340799998521106,
+            "max_ms": 10.488900001291768,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 967,
+              "bloqueados_filtro": 99,
+              "lotes_emitidos": 195,
+              "vetas_empaquetadas": 566,
+              "por_performativa": {
+                "CFP": 374,
+                "PROPOSE": 194,
+                "ACCEPT_PROPOSAL": 127,
+                "REJECT_PROPOSAL": 67,
+                "INFORM": 142,
+                "REQUEST": 38,
+                "AGREE": 25
+              },
+              "por_ontologia": {
+                "vickrey-bundle": 762,
+                "ring-discovery": 73,
+                "ring-governance": 69,
+                "rescue-triage": 63
+              }
+            },
+            "vickrey": {
+              "cfp_lote_enviados": 370,
+              "cfp_rescate_enviados": 4,
+              "propose_recibidos": 194,
+              "accept_enviados": 127,
+              "reject_enviados": 67,
+              "duplicados_evitados": 67
+            },
+            "votaciones": 61,
+            "transiciones_fsm": 24
+          },
+          "compartidos_vacios": true
+        }
+      }
+    },
+    {
+      "seed": 219,
+      "rotacion": 3,
+      "ticks": 1600,
+      "fase_final": false,
+      "hielo_restante": 77,
+      "ranking": [
+        {
+          "letra": "C",
+          "nombre": "RAVAGERS",
+          "color": [
+            245,
+            205,
+            30
+          ],
+          "recursos": 170,
+          "bateria": 6869.5,
+          "ratio": 0.02474707038357959,
+          "activas": 25,
+          "muertas": 25
+        },
+        {
+          "letra": "B",
+          "nombre": "LA AGENCIA",
+          "color": [
+            55,
+            130,
+            255
+          ],
+          "recursos": 158,
+          "bateria": 7500.0,
+          "ratio": 0.021066666666666668,
+          "activas": 26,
+          "muertas": 24
+        },
+        {
+          "letra": "A",
+          "nombre": "CUERVO",
+          "color": [
+            255,
+            120,
+            25
+          ],
+          "recursos": 140,
+          "bateria": 7276.5,
+          "ratio": 0.01924001924001924,
+          "activas": 42,
+          "muertas": 8
+        },
+        {
+          "letra": "D",
+          "nombre": "COLMENA",
+          "color": [
+            235,
+            55,
+            165
+          ],
+          "recursos": 148,
+          "bateria": 8382.0,
+          "ratio": 0.01765688379861608,
+          "activas": 43,
+          "muertas": 7
+        }
+      ],
+      "por_nombre": {
+        "RAVAGERS": {
+          "letra": "C",
+          "posicion": 1,
+          "ratio": 0.02474707038357959,
+          "recursos": 170,
+          "bateria": 6869.5,
+          "activas": 25,
+          "muertas": 25,
+          "profiling": {
+            "mean_ms": 0.6279799373771766,
+            "p95_ms": 2.8314999963185983,
+            "p99_ms": 5.766500000390806,
+            "max_ms": 8.474499996736995,
+            "mensajes": 847
+          },
+          "compartidos_vacios": true
+        },
+        "LA AGENCIA": {
+          "letra": "B",
+          "posicion": 2,
+          "ratio": 0.021066666666666668,
+          "recursos": 158,
+          "bateria": 7500.0,
+          "activas": 26,
+          "muertas": 24,
+          "profiling": {
+            "mean_ms": 0.7887898749197575,
+            "p95_ms": 3.30519999806711,
+            "p99_ms": 7.469300002412638,
+            "max_ms": 9.91950000570796,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1422,
+              "bloqueados_filtro": 9287,
+              "por_performativa": {
+                "CFP": 587,
+                "PROPOSE": 159,
+                "ACCEPT_PROPOSAL": 93,
+                "REJECT_PROPOSAL": 64,
+                "INFORM": 468,
+                "AGREE": 33,
+                "REQUEST": 18
+              },
+              "por_ontologia": {
+                "cnp-task": 903,
+                "resource-discovery": 430,
+                "governance": 38,
+                "rescue-ops": 51
+              }
+            },
+            "cnp": {
+              "cfp_enviados": 587,
+              "propose_recibidos": 157,
+              "accept_enviados": 93,
+              "reject_enviados": 64,
+              "duplicados_evitados": 65
+            },
+            "consensos": 13,
+            "transiciones_fsm": 33
+          },
+          "compartidos_vacios": true
+        },
+        "CUERVO": {
+          "letra": "A",
+          "posicion": 3,
+          "ratio": 0.01924001924001924,
+          "recursos": 140,
+          "bateria": 7276.5,
+          "activas": 42,
+          "muertas": 8,
+          "profiling": {
+            "mean_ms": 1.1531978749110294,
+            "p95_ms": 3.4783999926730758,
+            "p99_ms": 8.413800000198535,
+            "max_ms": 15.580099998260266,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1005,
+              "bloqueados_filtro": 11040,
+              "bloqueados_presion": 1043,
+              "por_performativa": {
+                "CFP": 458,
+                "PROPOSE": 66,
+                "ACCEPT_PROPOSAL": 37,
+                "REJECT_PROPOSAL": 29,
+                "INFORM": 357,
+                "REQUEST": 37,
+                "AGREE": 21
+              },
+              "por_ontologia": {
+                "cnp-dual": 590,
+                "stealth-intel": 316,
+                "cuervo-gov": 41,
+                "rescue-ops": 58
+              }
+            },
+            "cnp": {
+              "cfp_hielo": 442,
+              "cfp_carrona": 0,
+              "cfp_rescate": 16,
+              "propose_recibidos": 66,
+              "accept_enviados": 37,
+              "reject_enviados": 29,
+              "duplicados_evitados": 31
+            },
+            "hook_d": {
+              "evaluaciones_con_rivales": 0,
+              "interrupciones_veta": 0,
+              "interrupciones_evasion": 0,
+              "consumos_mantenidos": 0
+            },
+            "votaciones": 17,
+            "transiciones_fsm": 27
+          },
+          "compartidos_vacios": true
+        },
+        "COLMENA": {
+          "letra": "D",
+          "posicion": 4,
+          "ratio": 0.01765688379861608,
+          "recursos": 148,
+          "bateria": 8382.0,
+          "activas": 43,
+          "muertas": 7,
+          "profiling": {
+            "mean_ms": 1.1543879375255983,
+            "p95_ms": 2.9386000005615642,
+            "p99_ms": 6.0807000008935574,
+            "max_ms": 10.03330000276037,
+            "ticks": 1600,
+            "comms": {
+              "enviados": 1231,
+              "bloqueados_filtro": 3815,
+              "lotes_emitidos": 266,
+              "vetas_empaquetadas": 811,
+              "por_performativa": {
+                "CFP": 532,
+                "PROPOSE": 191,
+                "ACCEPT_PROPOSAL": 121,
+                "REJECT_PROPOSAL": 70,
+                "INFORM": 241,
+                "REQUEST": 46,
+                "AGREE": 30
+              },
+              "por_ontologia": {
+                "vickrey-bundle": 914,
+                "ring-discovery": 170,
+                "ring-governance": 71,
+                "rescue-triage": 76
+              }
+            },
+            "vickrey": {
+              "cfp_lote_enviados": 522,
+              "cfp_rescate_enviados": 10,
+              "propose_recibidos": 191,
+              "accept_enviados": 121,
+              "reject_enviados": 70,
+              "duplicados_evitados": 70
+            },
+            "votaciones": 61,
+            "transiciones_fsm": 28
+          },
+          "compartidos_vacios": true
+        }
+      }
+    }
+  ],
+  "resumen_200u": {
+    "LA AGENCIA": {
+      "victorias": 2,
+      "pos_media": 2.5,
+      "ratio_medio": 0.02318021966738562,
+      "ratio_std": 0.0024866377872631933,
+      "ratio_min": 0.02023176899929573,
+      "ratio_max": 0.027087761919222592,
+      "hielo_medio": 184,
+      "bateria_media": 7920.4375,
+      "activas_media": 25.5,
+      "mensajes_medio": 1455.25,
+      "mean_ms_medio": 0.828440289076724,
+      "p99_ms_max": 10.356800004956312,
+      "max_ms_max": 17.41359999505221
+    },
+    "RAVAGERS": {
+      "victorias": 4,
+      "pos_media": 2,
+      "ratio_medio": 0.024366367452776195,
+      "ratio_std": 0.002768317801273454,
+      "ratio_min": 0.01996951219512195,
+      "ratio_max": 0.027991822613618492,
+      "hielo_medio": 162.375,
+      "bateria_media": 6669.875,
+      "activas_media": 26.25,
+      "mensajes_medio": 781.75,
+      "mean_ms_medio": 0.541042093788775,
+      "p99_ms_max": 7.25119999879098,
+      "max_ms_max": 13.372900000831578
+    },
+    "COLMENA": {
+      "victorias": 1,
+      "pos_media": 3,
+      "ratio_medio": 0.021646125984412665,
+      "ratio_std": 0.0027669546705938568,
+      "ratio_min": 0.017652787923058192,
+      "ratio_max": 0.024078935457590295,
+      "hielo_medio": 142.875,
+      "bateria_media": 6720.375,
+      "activas_media": 38.375,
+      "mensajes_medio": 1054.5,
+      "mean_ms_medio": 1.0104428750044292,
+      "p99_ms_max": 7.054500001686392,
+      "max_ms_max": 13.576700010162313
+    },
+    "CUERVO": {
+      "victorias": 1,
+      "pos_media": 2.5,
+      "ratio_medio": 0.02264063043396431,
+      "ratio_std": 0.004433787050098915,
+      "ratio_min": 0.014957972069627375,
+      "ratio_max": 0.029429250891795482,
+      "hielo_medio": 163.125,
+      "bateria_media": 7253.75,
+      "activas_media": 39.625,
+      "mensajes_medio": 1205.875,
+      "mean_ms_medio": 1.0388796328268768,
+      "p99_ms_max": 8.413800000198535,
+      "max_ms_max": 15.580099998260266
+    }
+  },
+  "estres_400u": {
+    "seed": 100,
+    "rotacion": 0,
+    "ticks": 839,
+    "fase_final": true,
+    "hielo_restante": 0,
+    "ranking": [
+      {
+        "letra": "C",
+        "nombre": "COLMENA",
+        "color": [
+          245,
+          205,
+          30
+        ],
+        "recursos": 193,
+        "bateria": 10282.0,
+        "ratio": 0.018770667185372496,
+        "activas": 81,
+        "muertas": -31
+      },
+      {
+        "letra": "D",
+        "nombre": "CUERVO",
+        "color": [
+          235,
+          55,
+          165
+        ],
+        "recursos": 168,
+        "bateria": 11022.5,
+        "ratio": 0.01524155137219324,
+        "activas": 75,
+        "muertas": -25
+      },
+      {
+        "letra": "B",
+        "nombre": "RAVAGERS",
+        "color": [
+          55,
+          130,
+          255
+        ],
+        "recursos": 156,
+        "bateria": 11524.5,
+        "ratio": 0.01353637901861252,
+        "activas": 66,
+        "muertas": -16
+      },
+      {
+        "letra": "A",
+        "nombre": "LA AGENCIA",
+        "color": [
+          255,
+          120,
+          25
+        ],
+        "recursos": 115,
+        "bateria": 11816.0,
+        "ratio": 0.009732566012186866,
+        "activas": 70,
+        "muertas": -20
+      }
+    ],
+    "por_nombre": {
+      "COLMENA": {
+        "letra": "C",
+        "posicion": 1,
+        "ratio": 0.018770667185372496,
+        "recursos": 193,
+        "bateria": 10282.0,
+        "activas": 81,
+        "muertas": 19,
+        "profiling": {
+          "mean_ms": 1.8044230033991748,
+          "p95_ms": 6.144800003312412,
+          "p99_ms": 8.335600001373678,
+          "max_ms": 25.740599992786883,
+          "ticks": 839,
+          "comms": {
+            "enviados": 1282,
+            "bloqueados_filtro": 495,
+            "lotes_emitidos": 236,
+            "vetas_empaquetadas": 699,
+            "por_performativa": {
+              "CFP": 534,
+              "PROPOSE": 235,
+              "ACCEPT_PROPOSAL": 166,
+              "REJECT_PROPOSAL": 69,
+              "INFORM": 164,
+              "REQUEST": 64,
+              "AGREE": 50
+            },
+            "por_ontologia": {
+              "vickrey-bundle": 1004,
+              "ring-discovery": 125,
+              "rescue-triage": 114,
+              "ring-governance": 39
+            }
+          },
+          "vickrey": {
+            "cfp_lote_enviados": 472,
+            "cfp_rescate_enviados": 62,
+            "propose_recibidos": 235,
+            "accept_enviados": 166,
+            "reject_enviados": 69,
+            "duplicados_evitados": 69
+          },
+          "votaciones": 19,
+          "transiciones_fsm": 26
+        },
+        "compartidos_vacios": true
+      },
+      "CUERVO": {
+        "letra": "D",
+        "posicion": 2,
+        "ratio": 0.01524155137219324,
+        "recursos": 168,
+        "bateria": 11022.5,
+        "activas": 75,
+        "muertas": 25,
+        "profiling": {
+          "mean_ms": 1.919776758374921,
+          "p95_ms": 7.373800004643272,
+          "p99_ms": 12.195200000860495,
+          "max_ms": 14.925600018614205,
+          "ticks": 839,
+          "comms": {
+            "enviados": 2032,
+            "bloqueados_filtro": 14703,
+            "bloqueados_presion": 29,
+            "por_performativa": {
+              "INFORM": 720,
+              "CFP": 982,
+              "PROPOSE": 118,
+              "ACCEPT_PROPOSAL": 77,
+              "REJECT_PROPOSAL": 41,
+              "REQUEST": 62,
+              "AGREE": 32
+            },
+            "por_ontologia": {
+              "stealth-intel": 686,
+              "cnp-dual": 1218,
+              "rescue-ops": 94,
+              "cuervo-gov": 34
+            }
+          },
+          "cnp": {
+            "cfp_hielo": 960,
+            "cfp_carrona": 0,
+            "cfp_rescate": 22,
+            "propose_recibidos": 118,
+            "accept_enviados": 77,
+            "reject_enviados": 41,
+            "duplicados_evitados": 44
+          },
+          "hook_d": {
+            "evaluaciones_con_rivales": 1255,
+            "interrupciones_veta": 4,
+            "interrupciones_evasion": 0,
+            "consumos_mantenidos": 1251
+          },
+          "votaciones": 13,
+          "transiciones_fsm": 34
+        },
+        "compartidos_vacios": true
+      },
+      "RAVAGERS": {
+        "letra": "B",
+        "posicion": 3,
+        "ratio": 0.01353637901861252,
+        "recursos": 156,
+        "bateria": 11524.5,
+        "activas": 66,
+        "muertas": 34,
+        "profiling": {
+          "mean_ms": 1.1180915376030633,
+          "p95_ms": 6.572700005563092,
+          "p99_ms": 9.647899989431608,
+          "max_ms": 14.795600007346366,
+          "mensajes": 1513
+        },
+        "compartidos_vacios": true
+      },
+      "LA AGENCIA": {
+        "letra": "A",
+        "posicion": 4,
+        "ratio": 0.009732566012186866,
+        "recursos": 115,
+        "bateria": 11816.0,
+        "activas": 70,
+        "muertas": 30,
+        "profiling": {
+          "mean_ms": 1.697706078870943,
+          "p95_ms": 7.099300004483666,
+          "p99_ms": 15.69859998744505,
+          "max_ms": 21.31439998811402,
+          "ticks": 839,
+          "comms": {
+            "enviados": 2484,
+            "bloqueados_filtro": 11631,
+            "por_performativa": {
+              "CFP": 1154,
+              "PROPOSE": 221,
+              "ACCEPT_PROPOSAL": 130,
+              "REJECT_PROPOSAL": 91,
+              "INFORM": 770,
+              "AGREE": 61,
+              "REQUEST": 55,
+              "FAILURE": 2
+            },
+            "por_ontologia": {
+              "cnp-task": 1596,
+              "resource-discovery": 767,
+              "rescue-ops": 118,
+              "governance": 3
+            }
+          },
+          "cnp": {
+            "cfp_enviados": 1154,
+            "propose_recibidos": 221,
+            "accept_enviados": 130,
+            "reject_enviados": 91,
+            "duplicados_evitados": 115
+          },
+          "consensos": 0,
+          "transiciones_fsm": 36
+        },
+        "compartidos_vacios": true
+      }
+    }
+  },
+  "mecanismos_seed100": {
+    "LA AGENCIA": {
+      "mean_ms": 0.7723145626675887,
+      "p95_ms": 2.41420000565995,
+      "p99_ms": 7.130899999538087,
+      "max_ms": 13.695399993594037,
+      "ticks": 1600,
+      "comms": {
+        "enviados": 1416,
+        "bloqueados_filtro": 8784,
+        "por_performativa": {
+          "CFP": 619,
+          "PROPOSE": 169,
+          "ACCEPT_PROPOSAL": 101,
+          "REJECT_PROPOSAL": 68,
+          "INFORM": 404,
+          "AGREE": 40,
+          "REQUEST": 15
+        },
+        "por_ontologia": {
+          "cnp-task": 957,
+          "resource-discovery": 364,
+          "governance": 40,
+          "rescue-ops": 55
+        }
+      },
+      "cnp": {
+        "cfp_enviados": 619,
+        "propose_recibidos": 169,
+        "accept_enviados": 101,
+        "reject_enviados": 68,
+        "duplicados_evitados": 77
+      },
+      "consensos": 13,
+      "transiciones_fsm": 31
+    },
+    "RAVAGERS": {
+      "mean_ms": 0.5159749375388856,
+      "p95_ms": 2.8842999981861794,
+      "p99_ms": 7.167299998400267,
+      "max_ms": 10.237700002107886,
+      "mensajes": 701
+    },
+    "COLMENA": {
+      "mean_ms": 1.0487605624575735,
+      "p95_ms": 2.3347999922407325,
+      "p99_ms": 3.656299997601309,
+      "max_ms": 7.461199991666945,
+      "ticks": 1600,
+      "comms": {
+        "enviados": 925,
+        "bloqueados_filtro": 497,
+        "lotes_emitidos": 179,
+        "vetas_empaquetadas": 469,
+        "por_performativa": {
+          "CFP": 332,
+          "PROPOSE": 177,
+          "ACCEPT_PROPOSAL": 109,
+          "REJECT_PROPOSAL": 68,
+          "INFORM": 184,
+          "REQUEST": 38,
+          "AGREE": 17
+        },
+        "por_ontologia": {
+          "vickrey-bundle": 686,
+          "ring-discovery": 89,
+          "ring-governance": 95,
+          "rescue-triage": 55
+        }
+      },
+      "vickrey": {
+        "cfp_lote_enviados": 330,
+        "cfp_rescate_enviados": 2,
+        "propose_recibidos": 177,
+        "accept_enviados": 109,
+        "reject_enviados": 68,
+        "duplicados_evitados": 68
+      },
+      "votaciones": 61,
+      "transiciones_fsm": 24
+    },
+    "CUERVO": {
+      "mean_ms": 1.022462937498858,
+      "p95_ms": 3.3617999924899777,
+      "p99_ms": 5.9347999977035215,
+      "max_ms": 8.125200001813937,
+      "ticks": 1600,
+      "comms": {
+        "enviados": 1288,
+        "bloqueados_filtro": 21566,
+        "bloqueados_presion": 593,
+        "por_performativa": {
+          "INFORM": 460,
+          "CFP": 607,
+          "PROPOSE": 82,
+          "ACCEPT_PROPOSAL": 58,
+          "REJECT_PROPOSAL": 24,
+          "REQUEST": 35,
+          "AGREE": 22
+        },
+        "por_ontologia": {
+          "stealth-intel": 369,
+          "cnp-dual": 771,
+          "cuervo-gov": 91,
+          "rescue-ops": 57
+        }
+      },
+      "cnp": {
+        "cfp_hielo": 583,
+        "cfp_carrona": 16,
+        "cfp_rescate": 8,
+        "propose_recibidos": 82,
+        "accept_enviados": 58,
+        "reject_enviados": 24,
+        "duplicados_evitados": 24
+      },
+      "hook_d": {
+        "evaluaciones_con_rivales": 0,
+        "interrupciones_veta": 0,
+        "interrupciones_evasion": 0,
+        "consumos_mantenidos": 0
+      },
+      "votaciones": 35,
+      "transiciones_fsm": 26
+    }
+  }
+}

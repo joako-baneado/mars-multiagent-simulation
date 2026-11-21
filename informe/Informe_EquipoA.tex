@@ -1,10 +1,16 @@
 \documentclass[10pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[spanish,es-tabla]{babel}
-\usepackage[margin=2.0cm]{geometry}
+\renewcommand{\abstractname}{Resumen}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\tablename}{Tabla}
+\renewcommand{\refname}{Referencias}
+\renewcommand{\contentsname}{Índice}
+\usepackage[margin=1.9cm]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{xcolor}
@@ -14,6 +20,9 @@
 \usepackage{listings}
 
 \definecolor{agencia}{HTML}{FF7819}
+\definecolor{ravagers}{HTML}{D62728}
+\definecolor{colmena}{HTML}{1F77B4}
+\definecolor{cuervo}{HTML}{2CA02C}
 \definecolor{azul}{HTML}{1F4E79}
 \definecolor{gris}{HTML}{F4F6F9}
 
@@ -30,33 +39,39 @@
   breaklines=true
 }
 
-\title{\textbf{Trabajo Final: Simulación Multiagente Competitiva en Marte}\\
-\large Arquitectura, Implementación y Evaluación Experimental de \textbf{LA AGENCIA} (\texttt{equipoA.py})}
-\author{Tópicos en Ciencias de la Computación --- Equipo A (\texttt{LA AGENCIA})}
+\title{\textbf{Trabajo Final (TB2): Simulación Multiagente Competitiva en Marte}\\
+\large Arquitectura Comparada, Implementación y Evaluación Experimental de los Cuatro Equipos Autónomos:\\
+\textbf{LA AGENCIA} (\texttt{equipoA.py}), \textbf{RAVAGERS} (\texttt{equipoB.py}), \textbf{COLMENA} (\texttt{equipoC.py}) y \textbf{CUERVO} (\texttt{equipoD.py})}
+\author{Tópicos en Ciencias de la Computación --- Ecosistema Multiagente TB2}
 \date{\today}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Se presenta el diseño, implementación y validación experimental del agente autónomo \textbf{LA AGENCIA} (\texttt{equipoA.py}), desarrollado por herencia estricta de \texttt{EquipoBase} sin modificar \texttt{simulador.py} ni \texttt{equipo\_base.py}. La arquitectura integra las seis sesiones del curso bajo una regla estricta de integridad: memoria espacial privada por unidad y toda comunicación remota canalizada mediante mensajes FIPA-ACL con costo de $-0.5\,\%$ por envío y recepción. En un torneo de 10 partidas alternando las cuatro esquinas del mapa, \textbf{LA AGENCIA} obtuvo el \textbf{1.º lugar en 10/10 encuentros} con un $\text{Ratio}$ medio de $\mathbf{0.02545}$ frente a $\mathbf{0.01563}$ del mejor rival base promedio ($+62.8\,\%$), manteniendo una latencia media de $1.221\text{ ms}$ ($\text{p99}=11.184\text{ ms}$) con 200 unidades y $\text{p99}=32.215\text{ ms}$ ($<40\text{ ms}$) con 400 unidades concurrentes.
+Se presenta el diseño, implementación y validación experimental integral de los cuatro equipos autónomos competitivos del Trabajo Final (TB2) en la simulación multiagente de Marte ($60\times 45$): \textbf{LA AGENCIA} (\texttt{equipoA.py}), \textbf{RAVAGERS} (\texttt{equipoB.py}), \textbf{COLMENA} (\texttt{equipoC.py}) y \textbf{CUERVO} (\texttt{equipoD.py}). Todas las facciones heredan estrictamente de \texttt{EquipoBase} sin modificar \texttt{simulador.py} ni \texttt{equipo\_base.py} (verificado mediante firmas criptográficas SHA-256 antes y después de cada suite) y respetan la \textbf{regla de integridad arquitectónica}: memoria espacial privada por unidad bajo niebla de guerra y transferencia remota exclusivamente mediante mensajería estructurada FIPA-ACL con costo energético ($-0.5\,\%$ por envío y recepción). En la \textbf{Suite~1} (\texttt{benchmark\_equipoP.py}, \textbf{LA AGENCIA} vs.\ 3 \texttt{EquipoBase}), \textbf{LA AGENCIA} ganó \textbf{10/10 partidas} con $\text{Ratio}=0.02545$ frente a $0.01563$ del mejor oponente base ($+62.8\,\%$), validando además calibración RL-CEM y ablaciones de filtros FIPA-ACL y CNP. En la \textbf{Suite~2} (\texttt{benchmark\_torneo.py}, torneo oficial \emph{4-way} de 8 partidas con rotación de esquinas entre las cuatro facciones autónomas a 200 unidades), el ecosistema exhibe un equilibrio competitivo donde \textbf{las cuatro facciones obtienen victorias}: \textbf{RAVAGERS} lidera el $\text{Ratio}$ medio ($\mathbf{0.02437}$, 4/8 victorias, mínimo tráfico de $782$ mensajes), \textbf{LA AGENCIA} lidera el volumen de hielo ($\mathbf{184.0\text{ u.}}$, $\text{Ratio}=0.02318$, 2/8 victorias), \textbf{CUERVO} registra la mayor supervivencia ($39.6/50$ activas) y el pico absoluto del torneo ($\mathbf{0.02943}$, 1/8 victorias), y \textbf{COLMENA} logra la menor latencia p99 ($7.05\text{ ms}$, $\text{Ratio}=0.02165$, 1/8 victorias). Bajo \textbf{estrés extremo de 400 unidades concurrentes} ($100$/equipo), el ranking se invierte por congestión: \textbf{COLMENA} lidera ($\mathbf{0.01877}$, $193\text{ u.}$) seguida por \textbf{CUERVO} ($\mathbf{0.01524}$, $168\text{ u.}$), cumpliendo las cuatro facciones holgadamente el presupuesto de tiempo real ($<40\text{ ms/turno}$, con $\text{p99}\le 15.70\text{ ms}$ y $\text{máx}\le 25.74\text{ ms}$).
 \end{abstract}
 
-\section{Arquitectura Modular e Integridad del Sistema}
-El módulo \texttt{equipoA.py} implementa la clase \texttt{EquipoA(EquipoBase)} (\texttt{nombre = "LA AGENCIA"}) estructurada en seis capas desacopladas, ejecutadas de manera estrictamente no bloqueante en cada llamada a \texttt{decidir\_unidad}. Ninguna unidad lee diccionarios compartidos de equipo para obtener vetas, restos o rescates remotos: cada agente $u$ opera sobre su instancia aislada \texttt{MemoriaAgente} almacenada en \texttt{self.\_agentes[u.id]}.
+\section{Ecosistema Multiagente e Integridad Arquitectónica}
+El entorno de simulación (\texttt{simulador.py}, grilla $60\times 45$, 50 unidades por equipo en modo estándar y 100 en estrés) evalúa el desempeño competitivo mediante la métrica $\text{Ratio} = \text{Hielo depositado} / \text{Batería consumida (\%)}$. Para garantizar reproducibilidad e integridad académica, ambas suites de evaluación (\texttt{benchmark\_equipoP.py} y \texttt{benchmark\_torneo.py}) verifican las sumas SHA-256 de los archivos base al inicio y cierre:
+\begin{itemize}
+  \item \texttt{simulador.py}: \texttt{04bc483d5794e264d2a146429ef5f47644ce0fe58ff461cf41c37c49933d3f89}
+  \item \texttt{equipo\_base.py}: \texttt{9280dd328c5c49ab383f825c391eed33387e9e9ad4207efdeefe0fbb258a1de7}
+\end{itemize}
+Asimismo, los cuatro equipos mantienen vacíos los diccionarios compartidos heredados (\texttt{hielo\_conocido}, \texttt{restos\_conocidos}, \texttt{solicitudes\_recarga}): cada unidad $u$ opera únicamente sobre su estado privado en \texttt{self.\_agentes[u.id]} y toda coordinación remota transita por \texttt{CommsAPI}.
 
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[
-  node distance=0.45cm and 0.6cm,
-  box/.style={draw=azul, fill=gris, rounded corners=3pt, minimum width=3.1cm, minimum height=0.72cm, align=center, font=\footnotesize\bfseries},
+  node distance=0.42cm and 0.55cm,
+  box/.style={draw=azul, fill=gris, rounded corners=3pt, minimum width=3.2cm, minimum height=0.70cm, align=center, font=\footnotesize\bfseries},
   arr/.style={-{Stealth[scale=0.9]}, thick, azul}
 ]
-  \node[box] (s1) {1. Percepción y Memoria\\(\texttt{MemoriaAgente}, decay)};
-  \node[box, right=of s1] (s3) {3. Router FIPA-ACL\\(Filtros, cooldown, dedup)};
-  \node[box, right=of s3] (s4) {4. Subastas CNP\\(CFP, PROPOSE, ACCEPT)};
+  \node[box] (s1) {1. Percepción y Memoria\\(Creencias privadas, decay)};
+  \node[box, right=of s1] (s3) {3. Router FIPA-ACL\\(Filtros, cooldown, lotes)};
+  \node[box, right=of s3] (s4) {4. Coordinación / Subastas\\(CNP / Vickrey / Triaje)};
   \node[box, below=of s1] (s2) {2. Utilidad $U(s,a)$ y FSM\\(A* acotado, carroña)};
-  \node[box, below=of s3] (s5) {5. Gobernanza AutoGen\\(2 rondas + Copeland)};
+  \node[box, below=of s3] (s5) {5. Elección Social\\(AutoGen / Condorcet / Aprob.)};
   \node[box, below=of s4] (s6) {6. Profiling y Caché $O(1)$\\(\texttt{time.perf\_counter()})};
   \draw[arr] (s1) -- (s3);
   \draw[arr] (s3) -- (s4);
@@ -66,83 +81,159 @@ El módulo \texttt{equipoA.py} implementa la clase \texttt{EquipoA(EquipoBase)} 
   \draw[arr] (s5) -- (s2);
   \draw[arr] (s2) -- (s6);
 \end{tikzpicture}
-\caption{Arquitectura modular de 6 capas implementada en \texttt{equipoA.py}.}
+\caption{Arquitectura modular de referencia en 6 capas adoptada por los equipos autónomos de TB2.}
 \end{figure}
 
-\section{Sesión 1: Percepción y Memoria Espacial Individual}
-\subsection{Representación de Creencias y Política de Olvido}
-Cada agente mantiene creencias indexadas en estructuras $O(1)$ (\texttt{dict} y \texttt{set}):
+La Tabla~\ref{tab:matriz_equipos} sintetiza las decisiones de diseño diferenciadas que caracterizan a cada una de las cuatro facciones en las seis sesiones del curso.
+
+\begin{table}[H]
+\centering
+\caption{Matriz comparativa arquitectónica de las cuatro facciones autónomas de TB2.}\label{tab:matriz_equipos}
+\scriptsize
+\renewcommand{\arraystretch}{1.18}
+\begin{tabularx}{\textwidth}{>{\bfseries}l X X X X}
+\toprule
+Dimensión & \textbf{LA AGENCIA} (\texttt{equipoA}) & \textbf{RAVAGERS} (\texttt{equipoB}) & \textbf{COLMENA} (\texttt{equipoC}) & \textbf{CUERVO} (\texttt{equipoD}) \\
+\midrule
+Paradigma core & Modular 6 capas calibrado con RL-CEM & Blitz Central Agresivo + Modo Reposo & Economía marginal $\Delta\text{Ratio}$ por anillos & Enjambre fantasma rival-aware + estela \\
+Sesión 1 (Memoria y explor.) & \texttt{MemoriaAgente} ($\lambda=0.015$, TTL 120/70/14), barrido 3-wp & \texttt{\_MemoriaRavager}, 65\,\% exploradores al centro + 35\,\% cuadrante & \texttt{MemoriaColmena}, anillos $R_1{\le}21, R_2{\le}31, R_3{>}31$ por relevos & \texttt{MemoriaCuervo}, mapa de calor rival $5\times 5$ ($\lambda_p=0.03$), 2 alas (60/40) \\
+Sesión 2 (Utilidad, FSM y A*) & FSM explícitas, $U(s,a)$ RL-CEM, encadenamiento $r\le 13$, A* (28 exp.) & 60\,\% Grupo Blitz / 40\,\% Cuadrante, encaden. 5/5 ($r\le 12$), Modo Reposo, A* (24) & Compuerta marginal $\eta\ge\tau_{\text{marg}}$, rutas de lote encadenadas, A* (24 exp.) & Race-check $O(|R_{\text{vis}}|)$, transferencia carroña, \textbf{hook exclusivo} en \texttt{consumiendo}, A* (24) \\
+Sesión 3 (FIPA-ACL) & 8 performativas, 4 ontologías, cooldown 320, dedup y filtros & Ultra-ligero: solo vetas $\ge 3$ u. (cd 220) y restos $+20$ u. (cd 260) & \emph{Batch Digest}: empaqueta 2--4 vetas + tormentas por boletín & Filtrado táctico por presión rival (evita reportar vetas disputadas) \\
+Sesión 4 (Subastas / Coord.) & CNP descentralizado ($K=2$, reservas TTL 32) hielo/carroña/rescate & Asignación ligera directa sin sobrecarga de subastas & \textbf{Subasta Inversa de Vickrey por Lotes} (\texttt{Bundle CFP}) + triaje & \textbf{CNP Doble Mercado} (\texttt{hielo\_sigilo}, \texttt{soporte\_carrona}, \texttt{rescate}) \\
+Sesión 5 (Elección Social) & Consenso tipo AutoGen (2 rondas + Copeland) cada 45 ticks & Modo Reposo reactivo por cuota (140 u. base / 10 u. rover) + escuadrón élite & \textbf{Condorcet / Copeland ponderado} por crisis cada 26 ticks & \textbf{Votación por Aprobación + Copeland} cada 45 ticks \\
+Sesión 6 (Profiling) & \texttt{perf\_counter()}, $O(1)$ amortizado, $<40\text{ ms}$ & Ultra-baja latencia ($0.54\text{ ms}$ media a 200u, $1.12\text{ ms}$ a 400u) & \texttt{perf\_counter()}, menor p99 en 200u ($7.05\text{ ms}$) y 400u ($8.34\text{ ms}$) & \texttt{perf\_counter()}, race-check local $O(|R_{\text{vis}}|)$, máx $14.93\text{ ms}$ en 400u \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Diseño Técnico Detallado por Facción}
+
+\subsection{Equipo A: LA AGENCIA (\texttt{equipoA.py})}
+\textbf{LA AGENCIA} implementa la arquitectura completa de seis capas con separación estricta por unidad (\texttt{MemoriaAgente}):
 \begin{itemize}
-  \item \textbf{Hielo (\texttt{hielo}):} diccionario $(x,y) \mapsto \texttt{CreenciaHielo}(\text{pos}, \text{cantidad}, t_{\text{obs}}, \text{origen})$. La confianza decae exponencialmente según
+  \item \textbf{Creencias y Olvido Exponencial (Sesión 1):} Cada agente mantiene creencias de hielo $(x,y) \mapsto \texttt{CreenciaHielo}$ cuya confianza decae como
   \begin{equation}
-    c(t) = \exp\!\big(-\lambda (t - t_{\text{obs}})\big), \qquad \lambda = 0.015.
+    c(t) = \exp\!\big(-\lambda (t - t_{\text{obs}})\big), \qquad \lambda = 0.015,
   \end{equation}
-  Se aplica expiración dura si $t - t_{\text{obs}} > 120$ ticks o $c(t) < 0.14$.
-  \item \textbf{Restos (\texttt{restos}):} diccionario $\text{id} \mapsto \texttt{CreenciaRestos}$ con energía ($+20$ u. rover, $+10$ u. dron) y TTL de $70$ ticks.
-  \item \textbf{Tormentas (\texttt{tormentas}):} lista acotada de \texttt{TrazaTormenta} ($R=5$, TTL $14$ ticks). Cada nueva observación se asocia al centro previo más cercano ($d < 6.5$) para estimar $(v_x, v_y)$ y anticipar su desplazamiento en el siguiente tick.
-  \item \textbf{Invalidación activa:} en cada turno, toda creencia dentro del radio de visión ($r=5$ rovers, $r=9$ exploradores, $r=7$ recargadores) ausente en \texttt{hielo\_visible} o \texttt{restos\_visible} se purga de inmediato.
+  con expiración dura si $t - t_{\text{obs}} > 120$ ticks o $c(t) < 0.14$, restos energéticos (TTL $70$) y trazas de tormenta con velocidad estimada $(v_x,v_y)$ (TTL $14$, asociación $d < 6.5$). Se aplica invalidación activa dentro del radio de visión ($r=5$ rovers, $r=9$ exploradores, $r=7$ recargadores). Sus exploradores ejecutan un barrido sectorial compacto de 3 \emph{waypoints} que alcanza $\mathbf{84.0\,\%}$ de cobertura acumulada del mapa $60\times 45$ en los primeros $50$ ticks (Figura~\ref{fig:cobertura}).
+  \item \textbf{FSM, Utilidad Calibrada RL-CEM y A* Acotado (Sesión 2):} Tres enumeraciones explícitas (\texttt{EstadoRover}, \texttt{EstadoExplorador}, \texttt{EstadoRecargador}, Figura~\ref{fig:fsm}) gobiernan las transiciones obligatorias (batería $\le 25\,\%$ y fase final de $30\text{ s}$). La función de utilidad multi-atributo es:
+  \begin{equation}
+    U(s, a) = w_1\,\hat{g}_{\text{hielo}}(a) - w_2\,\hat{c}_{\text{despl}}(s, a) + w_3\,\hat{o}_{\text{carroña}}(s, a) - w_4\,\hat{r}_{\text{tormenta}}(s, a),
+  \end{equation}
+  con encadenamiento de vetas ($d_{\text{Cheb}} \le 13$, \texttt{chain\_bonus}$=1.50$) y pesos calibrados mediante \emph{Cross-Entropy Method} paralelo (RL-CEM en \texttt{entrenar\_la\_agencia.py}). Sin tormentas en $R+4$, navega en $O(1)$ por paso Chebyshev; ante amenaza activa un \textbf{A* 8-direccional acotado a 28 expansiones} con penalización $12.0 + 2(R+1-d)$.
+  \item \textbf{FIPA-ACL, CNP y Consenso AutoGen (Sesiones 3--5):} Utiliza las 8 performativas FIPA-ACL sobre 4 ontologías (\texttt{resource-discovery}, \texttt{rescue-ops}, \texttt{cnp-task}, \texttt{governance}) con cooldowns ($320$ hielo, $300$ restos, $24$ rescate) y flujo de auxilio (Figura~\ref{fig:seq_acl}). Las subastas CNP preseleccionan hasta $K=2$ postores ($d_{\text{Cheb}}\le 24$) con puja determinista:
+  \begin{equation}
+    \text{Bid}_{\text{hielo}} = 14\,q_{\text{disp}} - 1.25\,d_{\text{Cheb}} - 0.35\,d_{\text{base}} + 10\,\frac{b}{100} + 6\,\frac{C_{\text{libre}}}{C} - 6\,r_{\text{torm}},
+  \end{equation}
+  y reserva temporal (\texttt{TTL=32}). Cada $45$ ticks, cuatro roles (\texttt{ExploradorJefe}, \texttt{OficialLogistica}, \texttt{OficialSeguridad}, \texttt{ModeradorConsenso}) deliberan en 2 rondas estilo \textbf{AutoGen} ($<0.2\text{ ms}$) con desempate \textbf{Copeland} sobre \texttt{EXPANSION\_AGRESIVA}, \texttt{AHORRO\_ENERGETICO}, \texttt{SUPERVIVENCIA\_CARRONA} y \texttt{REPLIEGUE\_FINAL}.
 \end{itemize}
-La complejidad espacial por agente está acotada en el peor caso por el tamaño de la grilla $O(W\cdot H) = O(2700)$ celdas, y en la práctica por unas decenas de entradas vigentes.
-
-\subsection{Estrategia de Exploración y Cobertura}
-Los drones exploradores particionan la grilla $60\times 45$ dinámicamente según el tamaño de la flota (adaptándose a 15 o 30 exploradores) en sectores ordenados desde el cuadrante propio hacia el centro. Aprovechando el radio de visión $r=9$ (ventana $19\times 19$), cada dron ejecuta un barrido compacto de 3 \emph{waypoints}. Como muestra la Figura~\ref{fig:cobertura}, la cobertura acumulada del equipo alcanza el $\mathbf{84.0\,\%}$ del mapa en los primeros $50$ ticks, tras lo cual los exploradores modulan su cadencia de movimiento para ahorrar batería.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.72\linewidth]{figuras/cobertura_mapa.png}
-  \caption{Cobertura acumulada del mapa $60\times 45$ bajo niebla de guerra (\texttt{seed=100}).}\label{fig:cobertura}
-\end{figure}
-
-\section{Sesión 2: Utilidad Multi-Atributo y Máquinas de Estados Finitos}
-\subsection{FSM Diferenciadas por Rol}
-Se implementaron tres enumeraciones explícitas (\texttt{EstadoRover}, \texttt{EstadoExplorador}, \texttt{EstadoRecargador}) con registro de transiciones en ejecución ($33$ transiciones distintas observadas en partida). La Figura~\ref{fig:fsm} ilustra los estados y transiciones obligatorias para batería $\le 25\,\%$ y los $30\text{ s}$ finales.
 
 \begin{figure}[H]
 \centering
+\begin{minipage}[t]{0.55\textwidth}
+\centering
 \begin{tikzpicture}[
-  node distance=0.8cm and 1.1cm,
-  st/.style={draw=azul, fill=gris, rounded corners=4pt, font=\scriptsize\bfseries, align=center, minimum width=1.85cm, minimum height=0.58cm},
-  arr/.style={-{Stealth[scale=0.8]}, font=\tiny}
+  node distance=0.55cm and 0.65cm,
+  st/.style={draw=azul, fill=gris, rounded corners=3pt, font=\tiny\bfseries, align=center, minimum width=1.45cm, minimum height=0.48cm},
+  arr/.style={-{Stealth[scale=0.75]}, font=\tiny}
 ]
-  % Rover
   \node[st] (ro) {OCIOSO};
   \node[st, right=of ro] (re) {EXPLORANDO};
   \node[st, right=of re] (rr) {RECOLECTANDO};
   \node[st, right=of rr] (rt) {RETORNANDO};
-  \node[st, below=0.7cm of re] (rc) {CONSUMIENDO\\CARRONA};
-  \node[st, below=0.7cm of rr, draw=red!75!black] (rb) {ESPERANDO\\RECARGA};
+  \node[st, below=0.55cm of re] (rc) {CONSUMIENDO\\CARRONA};
+  \node[st, below=0.55cm of rr, draw=red!75!black] (rb) {ESPERANDO\\RECARGA};
   \draw[arr] (ro) -- node[above]{sin veta} (re);
   \draw[arr] (re) -- node[above]{$U>0$} (rr);
-  \draw[arr] (rr) -- node[above]{lleno/final} (rt);
-  \draw[arr] (rt) to[bend right=20] node[above]{deposita} (ro);
+  \draw[arr] (rr) -- node[above]{lleno/fin} (rt);
+  \draw[arr] (rt) to[bend right=22] node[above]{deposita} (ro);
   \draw[arr] (ro) -- (rc);
   \draw[arr] (rr) -- (rc);
-  \draw[arr] (rr) -- node[right]{bat $\le 25\%$} (rb);
-  \draw[arr] (rb) to[bend left=15] node[left]{recargado} (ro);
+  \draw[arr] (rr) -- node[right]{bat$\le$25\%} (rb);
+  \draw[arr] (rb) to[bend left=14] node[left]{recarg.} (ro);
 \end{tikzpicture}
-\caption{Diagrama de estados principales de \texttt{EstadoRover} (las transiciones a \texttt{ESPERANDO\_RECARGA} aplican desde cualquier estado activo con batería $\le 25\,\%$).}\label{fig:fsm}
+\caption{FSM principal de \texttt{EstadoRover} (compartida con variantes en los equipos A, C y D).}\label{fig:fsm}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.42\textwidth}
+\centering
+\begin{tikzpicture}[font=\tiny, >=Stealth]
+  \node (rov) at (0,0) {\textbf{Rover (bat $\le 25\%$)}};
+  \node (rec) at (3.9,0) {\textbf{Dron Recargador}};
+  \draw[dashed] (0,-0.22) -- (0,-2.1);
+  \draw[dashed] (3.9,-0.22) -- (3.9,-2.1);
+  \draw[->] (0,-0.5) -- node[above]{\texttt{REQUEST(rescue-ops)}} (3.9,-0.65);
+  \draw[->] (3.9,-1.0) -- node[above]{\texttt{AGREE(rescatista)}} (0,-1.15);
+  \draw[->,red!70!black] (3.9,-1.45) -- node[above]{\texttt{FAILURE(timeout/bat)}} (0,-1.6);
+  \draw[->] (0,-1.85) -- node[above]{Reintento tras cooldown} (3.9,-2.0);
+\end{tikzpicture}
+\caption{Secuencia FIPA-ACL de auxilio energético.}\label{fig:seq_acl}
+\end{minipage}
 \end{figure}
 
-Los \textbf{Drones Exploradores} alternan entre \texttt{PATRULLANDO} y \texttt{RETORNANDO\_BASE} (por batería $\le 25\,\%$ o fase final), mientras que los \textbf{Drones Recargadores} operan entre \texttt{EN\_ESPERA} (protegidos en perímetro de base evadiendo la tormenta $T_1$), \texttt{EN\_RESCATE} y \texttt{RETORNANDO\_BASE} cuando $\text{carga\_recarga}=0$ o batería $\le 25\,\%$.
+\begin{lstlisting}[caption={Traza real del consenso deliberativo AutoGen de \textbf{LA AGENCIA} en \texttt{seed=100} (ticks 30 y 536).}]
+Tick 30  | Evidencia: hielo=25, ricas=7, bajas=0, torm=1, bat=36.0%
+  Ronda 1 -> Expl: EXPANSION | Log: AHORRO | Seg: AHORRO | Mod: AHORRO
+  Copeland -> AHORRO: 3.0, EXPANSION: 1.5, SUPERVIVENCIA: 1.5, REPLIEGUE: 0.0
+  Resolucion: Consenso AutoGen (>=3/4) => AHORRO_ENERGETICO (epoch=1)
 
-\subsection{Función de Utilidad Multi-Atributo y Calibración RL-CEM}
-Los rovers evalúan cada objetivo candidato $a$ (veta de hielo, resto caído o retorno a base) mediante:
-\begin{equation}
-  U(s, a) = w_1\,\hat{g}_{\text{hielo}}(a) - w_2\,\hat{c}_{\text{despl}}(s, a) + w_3\,\hat{o}_{\text{carroña}}(s, a) - w_4\,\hat{r}_{\text{tormenta}}(s, a),
-\end{equation}
-donde $\hat{g}_{\text{hielo}}$ pondera el hielo extraíble $\min(q, C_{\text{libre}})$ por $c(t)$ y un factor \texttt{chain\_bonus} al encadenar vetas cercanas ($d_{\text{Cheb}} \le 13$), $\hat{c}_{\text{despl}}$ emplea distancia de Chebyshev real considerando el perímetro de depósito ($d_{\text{Cheb}}(\cdot,\text{base}) \le 2$), $\hat{o}_{\text{carroña}}$ valora $+20/+10\text{ u.}$ según necesidad propia ($<78\,\%$) o transferencia a aliado crítico ($<60\,\%$), y $\hat{r}_{\text{tormenta}}$ estima la exposición en el segmento hacia el objetivo.
+Tick 536 | Evidencia: hielo=0, bajas=3, torm=1, bat=51.2%
+  Ronda 1 -> Expl: REPLIEGUE | Log: AHORRO | Seg: SUPERVIVENCIA | Mod: SUPERVIVENCIA
+  Copeland -> AHORRO: 2.5, SUPERVIVENCIA: 2.5, REPLIEGUE: 1.0, EXPANSION: 0.0
+  Resolucion: Desempate Copeland => SUPERVIVENCIA_CARRONA (epoch=2)
+\end{lstlisting}
 
-Para calibrar los parámetros sin sacrificar robustez ante tormentas, se ejecutó \emph{Policy Search} mediante \emph{Cross-Entropy Method} paralelo (RL-CEM, 5 generaciones $\times$ 8 candidatos $\times$ 4 semillas) maximizando $J(\theta)=\overline{\text{Ratio}}-0.35\,\sigma$, junto con una optimización estructural de filtrado de reportes y barrido compacto (Figura~\ref{fig:rl} y Tabla~\ref{tab:rl}).
+\subsection{Equipo B: RAVAGERS (\texttt{equipoB.py})}
+\textbf{RAVAGERS} apuesta por una arquitectura minimalista orientada a maximizar el denominador energético del $\text{Ratio}$ mediante tres principios:
+\begin{itemize}
+  \item \textbf{Blitz Central Agresivo y Encadenamiento 5/5:} El $65\,\%$ de los drones exploradores barre velozmente la zona central disputada $(30,22)\pm 10$ para localizar vetas ricas ($3\text{--}5\text{ u.}$), mientras el $35\,\%$ cubre el cuadrante propio. De forma simétrica, el $60\,\%$ de los rovers (\emph{Grupo Blitz}) se despliega al anillo central (radio $6\text{--}13$) y el $40\,\%$ (\emph{Grupo Cuadrante}) limpia el entorno cercano con viajes cortos. Todos los rovers priorizan completar carga $5/5$ encadenando vetas en radio $d_{\text{Cheb}}\le 12$ antes de depositar en perímetro ($d_{\text{Cheb}}\le 2$), navegando con A* acotado a $24$ expansiones.
+  \item \textbf{FIPA-ACL Ultra-Ligero:} Sin sobrecarga de rondas de subasta, reporta únicamente vetas ricas ($\ge 3\text{ u.}$, cooldown $220$) y restos de rover ($+20\text{ u.}$, cooldown $260$) a través de \texttt{api}, manteniendo la memoria espacial privada (\texttt{\_MemoriaRavager}, $\lambda=0.015$, TTL $125/70/14$). Esta parsimonia reduce el tráfico a $782$ mensajes promedio por partida ($-46.3\,\%$ respecto a \textbf{LA AGENCIA}).
+  \item \textbf{Modo Reposo de Conservación de Ratio:} Una vez que el equipo alcanza la cuota \texttt{UMBRAL\_REPOSO\_BASE}$=140\text{ u.}$ o un rover deposita \texttt{UMBRAL\_REPOSO\_ROVER}$=10\text{ u.}$, la flota pasa a estado pasivo de consumo casi nulo, conservando únicamente un escuadrón élite en modo \texttt{ultra\_safe} ($6$ rovers y $2$ recargadores) para cosechar oportunidades cercanas sin inflar el gasto de batería.
+\end{itemize}
+
+\subsection{Equipo C: COLMENA (\texttt{equipoC.py})}
+\textbf{COLMENA} modela la recolección como un problema de \textbf{economía de retorno marginal ($\Delta\text{Ratio}$) por anillos concéntricos}:
+\begin{itemize}
+  \item \textbf{Memoria Anular y Exploración por Relevos:} \texttt{MemoriaColmena} (TTL $90/70/14$) clasifica toda veta en tres anillos concéntricos de Chebyshev desde \texttt{base\_pos}: $R_1$ ($d \le 21$), $R_2$ ($22 \le d \le 31$) y $R_3$ ($d > 31$). Los exploradores barren únicamente el anillo activo y aguardan en reposo seguro hasta que la gobernanza autoriza la expansión.
+  \item \textbf{Compuerta Marginal y FIPA-ACL por Lotes (\emph{Batch Digest}):} Para amortizar el costo plano de $-0.5\,\%$ por mensaje, los drones agrupan entre $2$ y $4$ vetas cercanas (más trazas de tormenta) en un único boletín comprimido. En \texttt{seed=100}, \textbf{COLMENA} emitió $179$ lotes empaquetando $469$ vetas ($2.62$ vetas/mensaje). Los rovers solo aceptan rutas cuya eficiencia marginal supera el umbral de la política vigente ($\tau_{\text{marg}} \in \{0.050, 0.042, 0.036, 0.070\}$):
+  \begin{equation}
+    \eta = \frac{\min(q_{\text{lote}}, C_{\text{libre}})}{\max(1,\; d_{\text{ruta}} + \alpha_{\text{ret}}\, d_{\text{vuelta}} + 4.0\,r_{\text{torm}})} \ge 0.65\,\tau_{\text{marg}}.
+  \end{equation}
+  \item \textbf{Subasta Inversa de Vickrey por Lotes y Triaje de Rescates:} Mediante \texttt{Bundle CFP} sobre la ontología \texttt{vickrey-bundle}, los rovers pujan verazmente el costo energético de su ruta encadenada:
+  \begin{equation}
+    \text{Cost}_{\text{Vickrey}} = d_{\text{ruta}} + 0.35\,d_{\text{vuelta}} + 5.0\,r_{\text{torm}} + 0.12\,(100 - b) - 1.8\,q_{\text{extr}}.
+  \end{equation}
+  Gana el menor costo, se registra el segundo menor costo (mecanismo de Vickrey) y se bloquea el lote con reserva \texttt{TTL=34}. Los rescates aplican triaje priorizando rovers con mayor carga en riesgo ($-6.0\,\text{carga}$).
+  \item \textbf{Elección Social (Condorcet / Copeland Ponderado por Crisis):} Cada $26$ ticks, cuatro representantes (\texttt{ExploradorAnular}, \texttt{EconomistaMarginal}, \texttt{OficialTriaje}, \texttt{ModeradorColmena}) votan sobre \texttt{ANILLO\_INTERNO}, \texttt{EXPANSION\_MEDIA}, \texttt{EXPANSION\_EXTERIOR} y \texttt{SELLADO\_RATIO}. Los pesos epistémicos se duplican ($2.0$) automáticamente para el rol experto cuando se detecta crisis de escasez ($h_{R_1}\le 3$), crisis energética ($\bar{b} < 62\,\%$) o crisis de tormentas/bajas.
+\end{itemize}
+
+\subsection{Equipo D: CUERVO (\texttt{equipoD.py})}
+\textbf{CUERVO} implementa un paradigma \textbf{rival-aware y oportunista} diseñado para evitar guerras de desgaste y capitalizar bajas enemigas:
+\begin{itemize}
+  \item \textbf{Mapa de Calor de Presión Rival y Exploración en Dos Alas:} \texttt{MemoriaCuervo} (TTL $125/70/14$) incorpora un mapa de calor de presión rival sobre macro-celdas $5\times 5$ con decaimiento exponencial ($\lambda_p = 0.03$, TTL $60$) y rastrea rivales en estado crítico ($\text{bat} \le 32\,\%$ o \texttt{esperando\_recarga}, TTL $45$). Sus exploradores se dividen en \emph{Ala Cuadrante \& Flancos} ($60\,\%$) y \emph{Ala Estela / Storm-Shadowers} ($40\,\%$) que vigilan el rastro de las tormentas.
+  \item \textbf{Race Check Local y Hook Exclusivo de \texttt{EquipoD}:} Antes de comprometer un rover, evalúa \texttt{\_prob\_captura\_sin\_disputa} en $O(|R_{\text{vis}}|)$ contra \texttt{percepcion.rivales\_visible}, descartando automáticamente carreras perdidas ($d_{\text{riv}} + 1 < d_{\text{yo}}$ en vetas $\le 3$ o $d_{\text{riv}} + 2 < d_{\text{yo}}$). Además, explota el \textbf{hook nativo de \texttt{simulador.py} exclusivo para \texttt{EquipoD}} cuando \texttt{estado == "consumiendo"}: si la batería es suficiente ($\ge 55\,\%$) y aparece una veta rica ganable ($\ge 3\text{ u.}$, $d\le 3$, $p_{\text{cap}}\ge 0.75$) o congestión de $\ge 2$ rovers rivales con carga en juego ($\ge 2$), cancela el consumo y pivota o evade mediante \texttt{paso\_alejarse}; con batería baja ($<50\,\%$) mantiene el consumo (\texttt{("esperar",)}). Los tres casos de borde se verifican explícitamente mediante aserciones unitarias en \texttt{benchmark\_torneo.py}.
+  \item \textbf{FIPA-ACL Filtrado por Presión, CNP de Doble Mercado y Votación por Aprobación:} Bloquea reportes en zonas saturadas de rivales ($593$ envíos frenados por presión rival más $21566$ por filtros clásicos en \texttt{seed=100}). Opera subastas CNP sobre tres canales (\texttt{hielo\_sigilo}, \texttt{soporte\_carrona}, \texttt{rescate}) permitiendo que rovers vacíos consuman carroña ($+20\text{ u.}$) para transferirla en campo a aliados cargados. Cada $45$ ticks, cuatro roles (\texttt{VigiaFrontera}, \texttt{SombraEstela}, \texttt{IntendenteCarrona}, \texttt{EstrategaCuervo}) aplican \textbf{Votación por Aprobación con desempate Copeland} entre \texttt{FLANQUEO\_SIGILOSO}, \texttt{COSECHA\_ESTELA\_CARRONA}, \texttt{AHORRO\_EVASIVO} y \texttt{REPLIEGUE\_FINAL}.
+\end{itemize}
+
+\section{Validación Experimental --- Suite 1: LA AGENCIA vs.\ \texttt{EquipoBase}, Ablaciones y RL-CEM}
+La suite \texttt{benchmark\_equipoP.py} (\texttt{resultados\_experimentos.json}) evalúa los componentes individuales de \textbf{LA AGENCIA} frente a tres oponentes \texttt{EquipoBase} estándar:
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.68\linewidth]{figuras/rl_calibracion.png}
-  \caption{Convergencia del entrenamiento paralelo RL-CEM sobre semillas de entrenamiento.}\label{fig:rl}
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figuras/cobertura_mapa.png}
+    \caption{Cobertura acumulada bajo niebla de guerra (\textbf{LA AGENCIA}, \texttt{seed=100}): $84.0\,\%$ en 50 ticks.}\label{fig:cobertura}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figuras/rl_calibracion.png}
+    \caption{Convergencia de la calibración paralela RL-CEM (5 gen.\ $\times$ 8 cand.\ $\times$ 4 semillas).}\label{fig:rl}
+  \end{minipage}
 \end{figure}
 
 \begin{table}[H]
 \centering
-\caption{Comparativa en 4 semillas de prueba no vistas (\texttt{101, 202, 303, 404}).}\label{tab:rl}
+\caption{Comparativa de calibración RL-CEM en 4 semillas no vistas (\texttt{101, 202, 303, 404}).}\label{tab:rl}
 \small
 \begin{tabular}{lcccc}
 \toprule
@@ -155,102 +246,25 @@ RL-CEM paralelo (10 parámetros) & 4/4 & 0.02300 & 7710.5\,\% & 1839.3 \\
 \end{tabular}
 \end{table}
 
-\subsection{Navegación Segura mediante A* Acotado}
-Cuando ninguna tormenta conocida amenaza el corredor directo, el agente avanza en $O(1)$ mediante paso Chebyshev. Si existe una tormenta dentro de $R+4$, ejecuta un \textbf{A* 8-direccional acotado a $28$ expansiones}, penalizando las celdas dentro de $R+0.8$ de la posición predicha de tormenta con costo $12.0 + 2(R+1-d)$ frente a $1.0$ por celda libre.
-
-\section{Sesión 3: Comunicación Estructurada FIPA-ACL}
-Todos los intercambios remotos encapsulan diccionarios estandarizados FIPA-ACL con los campos \texttt{performative}, \texttt{sender}, \texttt{conversation\_id}, \texttt{ontology} y \texttt{content}. Se emplean las 8 performativas exigidas (\texttt{REQUEST}, \texttt{INFORM}, \texttt{CFP}, \texttt{PROPOSE}, \texttt{ACCEPT\_PROPOSAL}, \texttt{REJECT\_PROPOSAL}, \texttt{AGREE}, \texttt{FAILURE}) sobre cuatro ontologías: \texttt{resource-discovery}, \texttt{rescue-ops}, \texttt{cnp-task} y \texttt{governance}.
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}[font=\scriptsize, >=Stealth]
-  \node (rov) at (0,0) {\textbf{Rover (bat $\le 25\%$)}};
-  \node (rec) at (5.2,0) {\textbf{Dron Recargador}};
-  \draw[dashed] (0,-0.25) -- (0,-2.6);
-  \draw[dashed] (5.2,-0.25) -- (5.2,-2.6);
-  \draw[->] (0,-0.6) -- node[above]{\texttt{REQUEST(rescue-ops)}} (5.2,-0.8);
-  \draw[->] (5.2,-1.25) -- node[above]{\texttt{AGREE(rescatista)}} (0,-1.45);
-  \draw[->,red!70!black] (5.2,-1.85) -- node[above]{\texttt{FAILURE(timeout/bat\_baja)}} (0,-2.05);
-  \draw[->] (0,-2.35) -- node[above]{Reintento tras cooldown} (5.2,-2.5);
-\end{tikzpicture}
-\caption{Diagrama de secuencia FIPA-ACL para el flujo de auxilio de recarga.}
-\end{figure}
-
-Para contener el costo de $-0.5\,\%$ por emisor y receptor ($-1.0\,\%$ por mensaje), se aplican: (i) \emph{cooldowns} por celda/incidente ($320$ ticks para hielo, $300$ para restos, $24$ para reintento de rescate), (ii) deduplicación en \texttt{MemoriaAgente}, (iii) umbrales mínimos de valor modulados por política y (iv) direccionamiento selectivo. Como se observa en la Figura~\ref{fig:comms} (\texttt{seed=100}), los filtros bloquearon $\mathbf{7611}$ envíos redundantes, reduciendo la mensajería de $1990$ a $\mathbf{1338}$ mensajes ($-32.8\,\%$), ahorrando $\mathbf{711.5\,\%}$ de batería total y elevando el $\text{Ratio}$ de $0.02163$ a $\mathbf{0.02294}$ ($+6.1\,\%$).
-
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.74\linewidth]{figuras/comms_ablation.png}
-  \caption{Impacto de los filtros anti-saturación FIPA-ACL sobre mensajes y $\text{Ratio}$.}\label{fig:comms}
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figuras/comms_ablation.png}
+    \caption{Ablación FIPA-ACL (\texttt{seed=100}): los filtros bloquean $7611$ envíos, reducen mensajes en $-32.8\,\%$ ($1990 \to 1338$), ahorran $711.5\,\%$ de batería y elevan el $\text{Ratio}$ en $+6.1\,\%$ ($0.02163 \to 0.02294$).}\label{fig:comms}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figuras/cnp_ablation.png}
+    \caption{Ablación CNP (\texttt{seed=100}): $580$ \texttt{CFP}, $141$ \texttt{PROPOSE}, $82$ adjudicaciones y $68$ colisiones evitadas, evidenciando el compromiso energético entre coordinación formal ($0.02294$) y envío directo ($0.02459$).}\label{fig:cnp}
+  \end{minipage}
 \end{figure}
 
-\section{Sesión 4: Coordinación mediante Contract Net Protocol (CNP)}
-El protocolo CNP coordina de forma descentralizada tanto vetas ricas/carroña entre rovers como el despacho de recargadores ante múltiples pedidos. El iniciador preselecciona hasta $K=2$ candidatos cercanos ($d_{\text{Cheb}}\le 24$) y emite \texttt{CFP}. Los postores disponibles calculan una puja determinista:
-\begin{equation}
-  \text{Bid}_{\text{hielo}} = 14\,q_{\text{disp}} - 1.25\,d_{\text{Cheb}} - 0.35\,d_{\text{base}} + 10\,\frac{b}{100} + 6\,\frac{C_{\text{libre}}}{C} - 6\,r_{\text{torm}}.
-\end{equation}
-Tras la ventana de subasta ($4$ ticks para rovers, $3$ para drones), el iniciador adjudica con \texttt{ACCEPT\_PROPOSAL} (desempate por mayor puja, mayor batería y \texttt{uid} lexicográfico), descarta con \texttt{REJECT\_PROPOSAL} y activa una reserva temporal (\texttt{TTL=32} ticks) que evita la duplicación de rutas.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.72\linewidth]{figuras/cnp_ablation.png}
-  \caption{Comparativa de desempeño con CNP activo frente a asignación directa (\texttt{seed=100}).}\label{fig:cnp}
-\end{figure}
-
-En el experimento de ablación (\texttt{seed=100}, Figura~\ref{fig:cnp}), el ciclo CNP ejecutó $580$ \texttt{CFP}, recibió $141$ \texttt{PROPOSE}, adjudicó $82$ contratos y evitó $\mathbf{68}$ desplazamientos duplicados. Debido a que cada ronda CNP consume entre $3$ y $4$ mensajes ($3\text{--}4\,\%$ de batería), la batería total con CNP fue $6407.5\,\%$ ($\text{Ratio}=0.02294$) frente a $6059.5\,\%$ ($\text{Ratio}=0.02459$) en envío directo de 1 mensaje, evidenciando el compromiso energético entre coordinación formal sin colisiones y costo comunicacional.
-
-\section{Sesión 5: Elección Social y Gobernanza Colectiva (AutoGen)}
-Cada $45$ ticks (o al activarse la fase final de $30\text{ s}$), cuatro representantes (\texttt{ExploradorJefe}, \texttt{OficialLogistica}, \texttt{OficialSeguridad} y \texttt{ModeradorConsenso}) ejecutan un protocolo deliberativo inspirado en \textbf{AutoGen}, estrictamente no bloqueante ($<0.2\text{ ms}$), sobre cuatro políticas globales: \texttt{EXPANSION\_AGRESIVA}, \texttt{AHORRO\_ENERGETICO}, \texttt{SUPERVIVENCIA\_CARRONA} y \texttt{REPLIEGUE\_FINAL}.
-
-\begin{enumerate}
-  \item \textbf{Ronda 1 (Propuesta):} cada rol ordena las 4 políticas según su telemetría FIPA-ACL (vetas ricas, batería media, bajas aliadas y tormentas).
-  \item \textbf{Ronda 2 (Crítica y Revisión):} cada rol incorpora las alertas de seguridad/exploración y emite su ranking revisado. Si existe mayoría ($\ge 3/4$), se sella el consenso; ante empates o ciclos de Condorcet se aplica desempate determinista por \textbf{puntuación de Copeland} (suma de victorias por pares).
-\end{enumerate}
-
-\begin{lstlisting}[caption={Traza real del consenso AutoGen en \texttt{seed=100} (ticks 30 y 536).}]
-Tick 30  | Evidencia: hielo=25, ricas=7, bajas=0, torm=1, bat=36.0%
-  Ronda 1 -> Expl: EXPANSION | Log: AHORRO | Seg: AHORRO | Mod: AHORRO
-  Copeland -> AHORRO: 3.0, EXPANSION: 1.5, SUPERVIVENCIA: 1.5, REPLIEGUE: 0.0
-  Resolucion: Consenso AutoGen (>=3/4) => AHORRO_ENERGETICO (epoch=1)
-
-Tick 536 | Evidencia: hielo=0, bajas=3, torm=1, bat=51.2%
-  Ronda 1 -> Expl: REPLIEGUE | Log: AHORRO | Seg: SUPERVIVENCIA | Mod: SUPERVIVENCIA
-  Copeland -> AHORRO: 2.5, SUPERVIVENCIA: 2.5, REPLIEGUE: 1.0, EXPANSION: 0.0
-  Resolucion: Desempate Copeland => SUPERVIVENCIA_CARRONA (epoch=2)
-\end{lstlisting}
-
-La política ganadora actualiza dinámicamente los pesos $(w_1,\dots,w_4)$, el umbral de reporte ACL y la cadencia de exploración, pasando automáticamente a \texttt{REPLIEGUE\_FINAL} en los últimos $30\text{ s}$ para proteger el $\text{Ratio}$.
-
-\section{Sesión 6: Arquitectura No Bloqueante y Rendimiento}
-El código prohíbe \texttt{time.sleep}, I/O síncrono y bucles no acotados. Todas las tablas de creencias, cooldowns y reservas operan en $O(1)$ amortizado; la cobertura y la navegación A* emplean evaluación perezosa (vía rápida $O(1)$ sin tormenta y tope de $28$ expansiones con tormenta). Así, la complejidad por turno para $N$ unidades es $O(N\cdot (|H_{\text{loc}}| + K_{\text{A*}}))$, acotada por constantes pequeñas.
+En el torneo de 10 semillas frente a tres rivales \texttt{EquipoBase} (rotando las cuatro esquinas), \textbf{LA AGENCIA} logró el \textbf{1.º lugar en 10/10 partidas}, con un $\text{Ratio}$ medio de $\mathbf{0.02545}$ frente a $\mathbf{0.01563}$ del mejor oponente base ($+62.8\,\%$, Tabla~\ref{tab:torneo} y Figura~\ref{fig:torneo}), y latencia aislada de $1.221\text{ ms}$ media ($\text{p99}=11.184\text{ ms}$) a 200 unidades y $\text{p99}=32.215\text{ ms}$ a 400 unidades (Figura~\ref{fig:prof_aislado}).
 
 \begin{table}[H]
 \centering
-\caption{Resultados de \emph{profiling} con \texttt{time.perf\_counter()} para 200 y 400 unidades.}\label{tab:prof}
-\small
-\begin{tabular}{lccccc}
-\toprule
-\textbf{Escenario} & \textbf{Media (ms)} & \textbf{p95 (ms)} & \textbf{p99 (ms)} & \textbf{Máx (ms)} & \textbf{Cumple $<40\text{ ms}$} \\
-\midrule
-200 unidades (50/equipo) & 1.221 & 4.398 & 11.184 & 21.515 & 100\,\% de ticks \\
-400 unidades (100/eq, aislado) & 5.650 & 19.815 & 32.215 & 49.896* & 99.8\,\% (2.º pico: 35.764\,ms) \\
-\bottomrule
-\end{tabular}
-\end{table}
-{\footnotesize *Un único pico aislado en 549 ticks por planificación del sistema operativo; $99.8\,\%$ de los turnos operan debajo de $36\text{ ms}$.}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.72\linewidth]{figuras/profiling_latencia.png}
-  \caption{Histograma de latencia total por turno de \textbf{LA AGENCIA} a 200 y 400 unidades.}\label{fig:prof}
-\end{figure}
-
-\section{Resultados de Torneo y Conclusiones}
-En el torneo oficial de 10 partidas con rotación por las cuatro esquinas (\texttt{A, B, C, D}) frente a tres rivales \texttt{EquipoBase}, \textbf{LA AGENCIA} ganó el \textbf{1.º lugar en las 10 partidas ($10/10$)}, alcanzando un $\text{Ratio}$ medio de $\mathbf{0.02545}$ (pico $\mathbf{0.0341}$ con $206\text{ u.}$ en la partida 3) frente a $\mathbf{0.01563}$ del mejor oponente base (Tabla~\ref{tab:torneo} y Figura~\ref{fig:torneo}).
-
-\begin{table}[H]
-\centering
-\caption{Resumen del torneo de 10 semillas rotando esquinas de inicio (\texttt{LA AGENCIA} vs. 3 \texttt{EquipoBase}).}\label{tab:torneo}
+\caption{Torneo base de 10 semillas (\textbf{LA AGENCIA} vs.\ 3 \texttt{EquipoBase}, rotando esquinas \texttt{A--D}).}\label{tab:torneo}
 \scriptsize
 \begin{tabular}{ccccccc}
 \toprule
@@ -274,10 +288,112 @@ En el torneo oficial de 10 partidas con rotación por las cuatro esquinas (\text
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.70\linewidth]{figuras/torneo_ratio.png}
-  \caption{Distribución de la métrica $\text{Ratio}$ en el torneo multi-semilla (10 partidas).}\label{fig:torneo}
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figuras/torneo_ratio.png}
+    \caption{Distribución de $\text{Ratio}$ en el torneo base de 10 partidas (\textbf{LA AGENCIA} vs.\ 3 \texttt{EquipoBase}).}\label{fig:torneo}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figuras/profiling_latencia.png}
+    \caption{Histograma de latencia aislada de \textbf{LA AGENCIA} a 200 u.\ ($\text{p99}=11.18\text{ ms}$) y 400 u.\ ($\text{p99}=32.22\text{ ms}$).}\label{fig:prof_aislado}
+  \end{minipage}
 \end{figure}
 
-En conclusión, la integración estrictamente descentralizada de memoria con olvido exponencial, utilidad multi-atributo con encadenamiento de vetas y evasión A*, mensajería FIPA-ACL con filtros anti-saturación, subastas CNP y consenso deliberativo tipo AutoGen permite a \textbf{LA AGENCIA} superar consistentemente en $+62.8\,\%$ a los equipos base respetando el presupuesto energético, la integridad arquitectónica y la fluidez gráfica en tiempo real.
+\section{Validación Experimental --- Suite 2: Torneo Oficial 4-Way y Estrés 400 Unidades}
+La suite \texttt{benchmark\_torneo.py} (\texttt{resultados\_torneo\_4way.json}) enfrenta simultáneamente a las cuatro facciones autónomas (\textbf{LA AGENCIA}, \textbf{RAVAGERS}, \textbf{COLMENA} y \textbf{CUERVO}) en 8 semillas (\texttt{100, 117, 134, 151, 168, 185, 202, 219}, hasta $1600$ ticks) rotando las esquinas de inicio (\texttt{rot=0..3}) para eliminar sesgos geométricos, seguido de una prueba de estrés simultánea con $400$ unidades ($100$/equipo).
+
+\subsection{Torneo Oficial 4-Way a 200 Unidades}
+Las Tablas~\ref{tab:partidas_4way} y~\ref{tab:resumen_4way}, junto con las Figuras~\ref{fig:torneo_4way_ratio} y~\ref{fig:torneo_4way_eficiencia}, muestran un ecosistema altamente competitivo donde las cuatro arquitecturas ganan al menos una partida y superan holgadamente el techo de \texttt{EquipoBase} ($0.01563$):
+
+\begin{table}[H]
+\centering
+\caption{Resultados detallados por partida en el Torneo Oficial 4-Way (200 unidades, 1600 ticks, rotación de esquinas).}\label{tab:partidas_4way}
+\scriptsize
+\begin{tabular}{ccccccc}
+\toprule
+\textbf{Partida} & \textbf{Semilla} & \textbf{Rot.} & \textbf{LA AGENCIA} & \textbf{RAVAGERS} & \textbf{COLMENA} & \textbf{CUERVO} \\
+\midrule
+01 & 100 & 0 & 0.0216 (4.º, A) & 0.0228 (3.º, B) & \textbf{0.0241 (1.º, C)} & 0.0240 (2.º, D) \\
+02 & 117 & 1 & 0.0202 (3.º, D) & \textbf{0.0280 (1.º, A)} & 0.0203 (2.º, B) & 0.0150 (4.º, C) \\
+03 & 134 & 2 & 0.0236 (2.º, C) & \textbf{0.0258 (1.º, D)} & 0.0233 (4.º, A) & 0.0233 (3.º, B) \\
+04 & 151 & 3 & \textbf{0.0259 (1.º, B)} & 0.0200 (4.º, C) & 0.0240 (2.º, D) & 0.0200 (3.º, A) \\
+05 & 168 & 0 & 0.0214 (4.º, A) & \textbf{0.0268 (1.º, B)} & 0.0240 (3.º, C) & 0.0253 (2.º, D) \\
+06 & 185 & 1 & \textbf{0.0271 (1.º, D)} & 0.0213 (3.º, A) & 0.0177 (4.º, B) & 0.0249 (2.º, C) \\
+07 & 202 & 2 & 0.0245 (3.º, C) & 0.0256 (2.º, D) & 0.0222 (4.º, A) & \textbf{0.0294 (1.º, B)} \\
+08 & 219 & 3 & 0.0211 (2.º, B) & \textbf{0.0247 (1.º, C)} & 0.0177 (4.º, D) & 0.0192 (3.º, A) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Resumen consolidado del Torneo Oficial 4-Way (200 unidades, promedio de 8 partidas con rotación).}\label{tab:resumen_4way}
+\scriptsize
+\begin{tabular}{lcccccccccc}
+\toprule
+\textbf{Facción} & \textbf{1.º} & \textbf{PosMed} & \textbf{RatioMed} & \textbf{Min--Max} & \textbf{Hielo} & \textbf{Bat (\%)} & \textbf{Act.} & \textbf{Msgs} & \textbf{p99 (ms)} & \textbf{Máx (ms)} \\
+\midrule
+\textbf{RAVAGERS}   & \textbf{4} & \textbf{2.00} & \textbf{0.02437} & 0.0200--0.0280 & 162.4 & \textbf{6669.9} & 26.3 & \textbf{782}  & 7.251 & \textbf{13.373} \\
+\textbf{LA AGENCIA} & 2 & 2.50 & 0.02318 & 0.0202--0.0271 & \textbf{184.0} & 7920.4 & 25.5 & 1455 & 10.357 & 17.414 \\
+\textbf{CUERVO}     & 1 & 2.50 & 0.02264 & 0.0150--\textbf{0.0294} & 163.1 & 7253.8 & \textbf{39.6} & 1206 & 8.414 & 15.580 \\
+\textbf{COLMENA}    & 1 & 3.00 & 0.02165 & 0.0177--0.0241 & 142.9 & 6720.4 & 38.4 & 1055 & \textbf{7.055} & 13.577 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.96\linewidth]{figuras/torneo_4way_ratio.png}
+  \caption{Distribución (izquierda) y evolución por semilla/rotación (derecha) del $\text{Ratio}$ en el Torneo 4-Way.}\label{fig:torneo_4way_ratio}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.96\linewidth]{figuras/torneo_4way_eficiencia.png}
+  \caption{Izquierda: compromiso Hielo vs.\ Batería y volumen de mensajería FIPA-ACL a 200 u. Derecha: escalabilidad del $\text{Ratio}$ al pasar de 200 a 400 unidades concurrentes.}\label{fig:torneo_4way_eficiencia}
+\end{figure}
+
+\paragraph{Telemetría verificada de protocolos en \texttt{seed=100} (1600 ticks):}
+\begin{itemize}
+  \item \textbf{LA AGENCIA:} $1416$ mensajes enviados ($8784$ bloqueados), $619$ \texttt{CFP}, $169$ \texttt{PROPOSE}, $101$ adjudicaciones CNP, $77$ desplazamientos duplicados evitados, $13$ consensos AutoGen y $31$ transiciones FSM distintas.
+  \item \textbf{COLMENA:} $925$ mensajes enviados ($497$ bloqueados), $179$ lotes emitidos ($469$ vetas empaquetadas), $330$ \texttt{CFP} Vickrey de lote + $2$ de rescate, $177$ \texttt{PROPOSE}, $109$ adjudicaciones, $68$ duplicados evitados, $61$ votaciones Condorcet/Copeland y $24$ transiciones FSM.
+  \item \textbf{CUERVO:} $1288$ mensajes enviados ($21566$ bloqueados por filtros + $593$ por presión rival), $583$ \texttt{CFP} de hielo + $16$ de carroña + $8$ de rescate, $82$ \texttt{PROPOSE}, $58$ adjudicaciones, $24$ duplicados evitados, $35$ votaciones Aprobación+Copeland y $26$ transiciones FSM.
+\end{itemize}
+
+\subsection{Prueba de Estrés 4-Way a 400 Unidades Concurrentes e Inversión de Ranking}
+Al duplicar la flota a $400$ unidades concurrentes ($100$/equipo, \texttt{seed=100}, $1200$ ticks), la densidad de tráfico y la disputa por vetas centrales se multiplican drásticamente (Tabla~\ref{tab:estres_400} y Figura~\ref{fig:prof_400}).
+
+\begin{table}[H]
+\centering
+\caption{Prueba de estrés simultánea 4-Way con 400 unidades concurrentes ($100$/equipo, \texttt{seed=100}, 1200 ticks).}\label{tab:estres_400}
+\small
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{Facción} & \textbf{Pos.} & \textbf{Ratio} & \textbf{Hielo (u.)} & \textbf{Bat (\%)} & \textbf{Act.} & \textbf{Media (ms)} & \textbf{p99 (ms)} & \textbf{Máx (ms)} \\
+\midrule
+\textbf{COLMENA}    & \textbf{1.º} & \textbf{0.01877} & \textbf{193} & \textbf{10282.0} & \textbf{81} & 1.804 & \textbf{8.336}  & 25.741 \\
+\textbf{CUERVO}     & 2.º & 0.01524 & 168 & 11022.5 & 75 & 1.920 & 12.195 & 14.926 \\
+\textbf{RAVAGERS}   & 3.º & 0.01354 & 156 & 11524.5 & 66 & \textbf{1.118} & 9.648  & \textbf{14.796} \\
+\textbf{LA AGENCIA} & 4.º & 0.00973 & 115 & 11816.0 & 70 & 1.698 & 15.699 & 21.314 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.88\linewidth]{figuras/profiling_4way_400u.png}
+  \caption{Latencia por turno de cada facción bajo estrés 4-Way con 400 unidades concurrentes frente al límite de $40\text{ ms}$.}\label{fig:prof_400}
+\end{figure}
+
+El análisis comparado entre 200 y 400 unidades revela un hallazgo estructural clave sobre escalabilidad multiagente:
+\begin{enumerate}
+  \item \textbf{Dominio por parsimonia a 200 unidades:} En densidad estándar, \textbf{RAVAGERS} domina el $\text{Ratio}$ ($0.02437$, 4/8 victorias) gracias a su mínimo consumo de batería ($6669.9\,\%$) y mensajería ultra-ligera ($782$ msgs) combinada con el \emph{Modo Reposo}; \textbf{LA AGENCIA} extrae el mayor volumen absoluto de hielo ($184.0\text{ u.}$), pero su mayor tráfico CNP ($1455$ msgs) eleva su gasto energético ($7920.4\,\%$).
+  \item \textbf{Inversión del ranking bajo congestión extrema (400 unidades):} Con $400$ agentes disputando la misma grilla $60\times 45$, el asalto central de \textbf{RAVAGERS} y la exploración extensiva de \textbf{LA AGENCIA} sufren rendimientos decrecientes por congestión. En contraste, \textbf{COLMENA} salta al \textbf{1.º lugar} ($\mathbf{0.01877}$, $193\text{ u.}$, $81/100$ activas) porque su compuerta de retorno marginal por anillos concéntricos y sus lotes Vickrey evitan viajes largos improductivos, seguida por \textbf{CUERVO} ($\mathbf{0.01524}$, $168\text{ u.}$) cuyo \emph{race-check} rival-aware descarta disputas perdidas antes de gastar batería.
+  \item \textbf{Cumplimiento estricto de tiempo real:} Incluso con $400$ unidades ejecutando cuatro inteligencias completas en paralelo, todas las facciones operan muy por debajo del presupuesto de $40\text{ ms/turno}$ (medias entre $1.12$ y $1.92\text{ ms}$, $\text{p99}$ entre $8.34$ y $15.70\text{ ms}$, y picos máximos $\le 25.74\text{ ms}$).
+\end{enumerate}
+
+\section{Conclusiones}
+El ecosistema TB2 demuestra que es posible construir cuatro arquitecturas multiagente descentralizadas, conceptualmente distintas y estrictamente aisladas bajo niebla de guerra (\textbf{LA AGENCIA}, \textbf{RAVAGERS}, \textbf{COLMENA} y \textbf{CUERVO}), respetando intactos el motor de simulación y la clase base (SHA-256 verificados) así como la fluidez en tiempo real ($<40\text{ ms/turno}$ hasta $400$ unidades). Los experimentos confirman que no existe una única estrategia universalmente dominante en todos los regímenes de densidad: la parsimonia comunicacional con \emph{Modo Reposo} (\textbf{RAVAGERS}) y la utilidad calibrada por RL-CEM (\textbf{LA AGENCIA}) destacan en densidad estándar ($200$ unidades), mientras que los mecanismos económicos de control de congestión ---anillos marginales con subastas Vickrey por lotes (\textbf{COLMENA}) y filtrado rival-aware (\textbf{CUERVO})--- resultan decisivos al duplicar la escala del sistema ($400$ unidades).
 
 \end{document}
